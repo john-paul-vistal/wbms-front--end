@@ -1,0 +1,33 @@
+<div id="page-content-wrapper">
+    <div class="row container pt-5">
+        <h5 class="font-weight-bold ml-5">Transaction Records</h5>
+        <div class="input-group">
+            <span class="input-group-addon">
+                <i class="fa fa-search fa-2x"></i>
+            </span>
+            <input type="text" class="form-control ml-2" />
+        </div>
+    </div>
+    <div class="row container">
+        <div class="col">
+            <table class="table table-striped table-bordered ml-3 mr-3" id="top_selling_table">
+                <thead class="tHead">
+                    <tr>
+                        <th scope="col">House No.</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Water Consumption</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody" *ngFor="let transactionRecords of transactionRecords">
+                    <td>{{transactionRecords.houseNo}}</td>
+                    <td>{{transactionRecords.customerName}}</td>
+                    <td>{{transactionRecords.waterConsumption}}</td>
+                    <td>{{transactionRecords.amount}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button class=" bottom btn btn-primary mr-5 mb-2">Previous</button>
+    <button class="bottom btn btn-primary mr-2 mb-2">Next</button>
+</div>

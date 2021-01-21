@@ -1,0 +1,32 @@
+<div id="page-content-wrapper">
+    <div class="row container pt-5">
+        <h5 class="font-weight-bold ml-5">Customer Records</h5>
+        <div class="input-group">
+            <input type="text" class="form-control ml-2" />
+            <button class="btn btn-primary ml-2 mb-4">Register New Customer</button>
+        </div>
+
+    </div>
+    <div class="row container">
+        <div class="col">
+            <table class="table table-striped table-bordered ml-3 mr-3" id="top_selling_table">
+                <thead>
+                    <tr>
+                        <th scope="col">House No.</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody" *ngFor="let customers of customers">
+                    <td>{{customers.houseNo}}</td>
+                    <td>{{customers.customerName}}</td>
+                    <td>{{customers.address}}</td>
+                    <td>{{customers.status}}</td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button class=" bottom btn btn-primary mr-5 mb-2">Previous</button>
+    <button class="bottom btn btn-primary mr-2 mb-2">Next</button>
+</div>
