@@ -3,42 +3,11 @@
 <!-- Top Navbar -->
 
 <div id="wrapper">
-  <div id="sidebar-wrapper" class="shadow">
-    <app-side-bar></app-side-bar>
-  </div>
+  <!-- SIDE BAR -->
+  <app-side-bar></app-side-bar>
+  <!-- SIDE BAR -->
 
-  <!-- Page content -->
-  <div id="page-content-wrapper">
-    <div class="page-content">
-      <div class="container">
-        <!-- breadcrumb -->
-        <div class="bg-white shadow  mt-3 rounded" style="position: relative;">
-          <button
-            class="btn btn-primary rounded-circle text-center mt-2 ml-1 float-left"
-            style="padding-left:13px;padding-right:13px;padding-top:8px;padding-bottom:8px;"
-          >
-            <i class="fa fa-bars"></i>
-          </button>
-          <ol class="breadcrumb bg-white mb-1 py-3 px-3 ml-3">
-            <li class="breadcrumb-item active" aria-current="page">Home</li>
-            <li class="breadcrumb-item active" aria-current="page">
-              Create Transaction
-            </li>
-          </ol>
-        </div>
-        <!-- breadcrumb -->
-
-        <!-- Place your page content here -->
-        <!-- <app-landing-page></app-landing-page> -->
-        <!-- <app-create-transaction></app-create-transaction> -->
-        <!-- <app-transaction></app-transaction> -->
-        <!-- <app-customer></app-customer> -->
-        <!-- <app-employee></app-employee> -->
-        <!-- <app-settings></app-settings> -->
-        <router-outlet></router-outlet>
-      </div>
-    </div>
-  </div>
+  <!-- PAGE CONTENT -->
+  <router-outlet></router-outlet>
+  <!-- PAGE CONTENT -->
 </div>
-
-<!-- <app-login></app-login> -->

@@ -1,6 +1,6 @@
 <nav
   class="mb-1 navbar navbar-expand-lg navbar-dark navbar-fixed fixed-top topNav"
->
+  *ngIf="authenticationService.isAuthenticated">
   <a class="navbar-brand" href="#">
     <img
       class="bg-light rounded-circle"

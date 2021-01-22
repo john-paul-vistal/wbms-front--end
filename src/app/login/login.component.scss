@@ -15,11 +15,15 @@ input {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 40%;
 }
 
 .logo {
   width: 200px;
+}
+
+.loginCard {
+  margin-left: -250px;
 }
 
 @media (max-width: 750px) {
@@ -38,5 +42,9 @@ input {
     position: absolute;
     top: 30px;
     left: -1px;
+  }
+
+  .loginCard {
+    margin-left: 0px;
   }
 }
