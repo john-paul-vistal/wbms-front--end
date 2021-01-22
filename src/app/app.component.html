@@ -1,120 +1,44 @@
 <!-- Top Navbar -->
-<nav class="mb-1 navbar navbar-expand-lg navbar-dark navbar-fixed topNav">
-    <a class="navbar-brand" href="#">
-        <img width="30" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-        />
-        <span class="font-weight-bold">&nbsp;WMBS</span>
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="fas fa-bars"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="mainNav">
-
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item mr-1">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-envelope fa-lg mx-1"></i>
-                    <span class="badge badge-dot"></span>
-                </a>
-            </li>
-            <li class="nav-item mr-2">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-truck mx-1"></i>
-                    <span class="badge badge-dot"></span>
-                </a>
-            </li>
-            <li class="nav-item dropdown active">
-                <div class="dropdown">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" height="30" alt="" />
-                        <span>&nbsp;&nbsp;John Doe</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">My Account</a></li>
-                        <li><a class="dropdown-item" href="#">Logout</a></li>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-
+<app-header></app-header>
 <!-- Top Navbar -->
 
 <div id="wrapper">
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper" class="shadow">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand shadow mb-2">
-                <a href="#">
-                    Dashboard
-                </a>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-tachometer-alt mr-3"></i>Dashboard</a>
-            </li>
-            <li>
-                <a href="#" class="dropdown-toggle mr-3" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tachometer-alt mr-3"></i>Transaction</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <button class="dropdown-item" type="button">Create Transaction</button>
-                    <button class="dropdown-item" type="button">Transaction Records</button>
-                </div>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-tachometer-alt mr-3"></i>Customer</a>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-tachometer-alt mr-3"></i>Employee</a>
-            </li>
-            <li>
-                <a href="#"><i class="fas fa-tachometer-alt mr-3"></i>Settings</a>
-            </li>
-        </ul>
-    </div>
-    <!-- /#sidebar-wrapper -->
+  <div id="sidebar-wrapper" class="shadow">
+    <app-side-bar></app-side-bar>
+  </div>
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><i class="fa fa-bars"></i> </a>
-                </div>
-            </div>
-            <!-- <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Library</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Data</li>
-                </ol>
-            </nav> -->
-            <!-- <app-landing-page></app-landing-page> -->
+  <!-- Page content -->
+  <div id="page-content-wrapper">
+    <div class="page-content">
+      <div class="container">
+        <!-- breadcrumb -->
+        <div class="bg-white shadow  mt-3 rounded" style="position: relative;">
+          <button
+            class="btn btn-primary rounded-circle text-center mt-2 ml-1 float-left"
+            style="padding-left:13px;padding-right:13px;padding-top:8px;padding-bottom:8px;"
+          >
+            <i class="fa fa-bars"></i>
+          </button>
+          <ol class="breadcrumb bg-white mb-1 py-3 px-3 ml-3">
+            <li class="breadcrumb-item active" aria-current="page">Home</li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Create Transaction
+            </li>
+          </ol>
         </div>
-    </div>
-    <!-- /#page-content-wrapper -->
+        <!-- breadcrumb -->
 
+        <!-- Place your page content here -->
+        <!-- <app-landing-page></app-landing-page> -->
+        <!-- <app-create-transaction></app-create-transaction> -->
+        <!-- <app-transaction></app-transaction> -->
+        <!-- <app-customer></app-customer> -->
+        <!-- <app-employee></app-employee> -->
+        <!-- <app-settings></app-settings> -->
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
 </div>
 
-
-
-
-
-
 <!-- <app-login></app-login> -->
-
-
-<!-- <app-create-transaction></app-create-transaction> -->
-
-<!-- <app-transaction></app-transaction> -->
-
-<!-- <app-customer></app-customer> -->
-
-<router-outlet></router-outlet>
-
-<script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-</script>
