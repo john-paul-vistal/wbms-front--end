@@ -16,6 +16,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { SettingsComponent } from './settings/settings.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { HeaderComponent } from './header/header.component';
+import { AuthenticationComponent } from './Service/authentication/authentication/authentication.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HeaderComponent } from './header/header.component';
     EmployeeComponent,
     SettingsComponent,
     SideBarComponent,
-    HeaderComponent
+    HeaderComponent,
+    AuthenticationComponent
     
   ],
   imports: [
