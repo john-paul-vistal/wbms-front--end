@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthenticationService } from '../service/authentication/authentication.service';
+import { SignInData } from '../model/signInData';
 
 import { Router } from '@angular/router';
-
-// import {CookieService} from 'angular2-cookie/core';
 
 @Component({
   selector: 'app-login',
@@ -11,16 +11,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-
-  constructor(private http: HttpClient,private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
     this.onload();
   }
 
   onSubmit(data) {
-    this.router.navigate(['/dashboard']);
+    const signInData = new SignInData(data['username'], data['password']);
+    this.authenticationService.authenticate(signInData);
+    // this.router.navigate(['/dashboard']);
     // console.log(data);
     // this.http
     //   .post('https://wbm-system.herokuapp.com/api/login', data)
@@ -31,7 +35,6 @@ export class LoginComponent implements OnInit {
     //     // this._cookieService.put('Authorization',result['token']);
     //   });
   }
-
 
   onload() {
     const httpHeaders = new HttpHeaders({

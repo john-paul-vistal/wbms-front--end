@@ -1,7 +1,8 @@
 <div
   id="sidebar-wrapper"
   class="shadow"
-  >
+  *ngIf="authenticationService.isAuthenticated"
+>
   <ul class="sidebar-nav">
     <li class="sidebar-brand shadow mb-2">
       <a href="#">

@@ -1,4 +1,4 @@
-<div class="wrapper fadeInDown mt-5">
+<div class="wrapper fadeInDown mt-5 loginCard">
   <div
     class="main shadow-lg p-5 mb-5 rounded center"
     style="background:rgba(255, 255, 255, 0.884)"
@@ -12,16 +12,32 @@
       />
     </div>
 
-    <form #signInForm = "ngForm" (ngSubmit)="onSubmit(signInForm.value)"  autocomplete="off">
+    <form
+      #signInForm="ngForm"
+      (ngSubmit)="onSubmit(signInForm.value)"
+      autocomplete="off"
+    >
       <div class="form-group" style="position: relative;">
         <label for="email" class="icon"> <i class="fa fa-user"></i> </label
         >&nbsp;&nbsp;
-        <input type="text" ngModel name="username" placeholder="Username" required />
+        <input
+          type="text"
+          ngModel
+          name="username"
+          placeholder="Username"
+          required
+        />
       </div>
       <div class="form-group mb-2" style="position: relative;">
         <label for="email" class="icon"> <i class="fa fa-lock"></i> </label
         >&nbsp;&nbsp;
-        <input type="password" ngModel name="password" placeholder="Password" required />
+        <input
+          type="password"
+          ngModel
+          name="password"
+          placeholder="Password"
+          required
+        />
       </div>
       <br />
       <button
