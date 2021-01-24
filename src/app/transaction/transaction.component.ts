@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { transactionRecords } from '../app-models';
+import { AuthenticationService } from '../service/authentication/authentication.service';
 
 @Component({
   selector: 'app-transaction',
@@ -7,23 +8,9 @@ import { transactionRecords } from '../app-models';
   styleUrls: ['./transaction.component.scss']
 })
 export class TransactionComponent implements OnInit {
-
-
-  transactionRecords: transactionRecords[]= [
-    {houseNo: 1, customerName: "Juan Tamad", waterConsumption: 300, amount: 2300},
-    {houseNo: 2, customerName: "Pedro Penduko", waterConsumption: 420, amount: 3200},
-    {houseNo: 3, customerName: "Jin Mori", waterConsumption: 280, amount: 2000 }
-  ]
-
-  houseNo = 0;
-  customerName = '';
-  waterConsumption = 0;
-  amount = 0;
-
-
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {
+    this.authenticationService.authenticate('transaction-records');
   }
-
 }

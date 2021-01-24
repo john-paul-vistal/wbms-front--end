@@ -29,9 +29,14 @@
             <input
               class="form-control searchTransaction"
               type="text"
+              name="search"
+              [(ngModel)]="search"
+              (ngModelChange)="Search()"
               style="width:300px;padding-left:40px"
             />
-            <button class="btn btn-primary ml-2">Register Household</button>
+            <button class="btn btn-primary ml-2">
+              Register Household
+            </button>
           </div>
         </div>
         <hr />
@@ -40,45 +45,20 @@
           <thead>
             <tr class="shadow" style="background:rgb(29, 144, 252)">
               <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">Customer Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Email</th>
+              <th scope="col">Contact Number</th>
               <th scope="col" class="text-center">Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody *ngFor="let record of householdRecords">
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td class="text-center">
-                <button class="btn btn-info">View</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td class="text-center">
-                <button class="btn btn-info">View</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td class="text-center">
-                <button class="btn btn-info">View</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+              <th scope="row">{{ record.id }}</th>
+              <td>{{ record.firstName }} {{ record.lastName }}</td>
+              <td>{{ record.address }}</td>
+              <td>{{ record.email }}</td>
+              <td>{{ record.contactNumber }}</td>
               <td class="text-center">
                 <button class="btn btn-info">View</button>
               </td>

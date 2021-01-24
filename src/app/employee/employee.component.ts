@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../service/authentication/authentication.service';
 
 @Component({
   selector: 'app-employee',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./employee.component.scss']
 })
 export class EmployeeComponent implements OnInit {
-
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {
+    this.authenticationService.authenticate('employee');
   }
-
 }

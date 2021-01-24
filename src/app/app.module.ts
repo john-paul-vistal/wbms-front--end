@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-// import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,8 +13,7 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { CustomerComponent } from './customer/customer.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { SettingsComponent } from './settings/settings.component';
-import { SideBarComponent } from './side-bar/side-bar.component';
-import { HeaderComponent } from './header/header.component';
+import { RegHouseholdComponent } from './reg-household/reg-household.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +25,7 @@ import { HeaderComponent } from './header/header.component';
     CustomerComponent,
     EmployeeComponent,
     SettingsComponent,
-    SideBarComponent,
-    HeaderComponent
+    RegHouseholdComponent
   ],
   imports: [
     BrowserModule,

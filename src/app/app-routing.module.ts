@@ -8,6 +8,8 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { CustomerComponent } from './customer/customer.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { SettingsComponent } from './settings/settings.component';
+import { RegHouseholdComponent } from './reg-household/reg-household.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -16,27 +18,38 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: LandingPageComponent
+    component: LandingPageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'pending-transactions',
-    component: CreateTransactionComponent
+    component: CreateTransactionComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'transaction-records',
-    component: TransactionComponent
+    component: TransactionComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'household-records',
-    component: CustomerComponent
+    component: CustomerComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'employee',
-    component: EmployeeComponent
+    component: EmployeeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'settings',
-    component: SettingsComponent
+    component: SettingsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'register-household',
+    component: RegHouseholdComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

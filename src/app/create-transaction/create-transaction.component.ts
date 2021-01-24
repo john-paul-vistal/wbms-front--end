@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { createTransactions } from '../app-models';
+import { AuthenticationService } from '../service/authentication/authentication.service';
 
 @Component({
   selector: 'app-create-transaction',
@@ -7,26 +8,9 @@ import { createTransactions } from '../app-models';
   styleUrls: ['./create-transaction.component.scss']
 })
 export class CreateTransactionComponent implements OnInit {
-
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) {}
 
   ngOnInit(): void {
+    this.authenticationService.authenticate('pending-transaction');
   }
-
-  createTransactions: createTransactions[]= [
-    {houseNo: 1, customerName: "Juan Tamad", waterConsumption: 300, amount: 2300},
-    {houseNo: 2, customerName: "Pedro Penduko", waterConsumption: 420, amount: 3200},
-    {houseNo: 3, customerName: "Jin Mori", waterConsumption: 280, amount: 2000 }
-  ]
-
-  houseNo = 0;
-  customerName = '';
-  waterConsumption = 0;
-  amount = 0;
-
-
- 
 }
-
-
-

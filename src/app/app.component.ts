@@ -8,6 +8,11 @@ import { AuthenticationService } from './service/authentication/authentication.s
 })
 export class AppComponent {
   title = 'wmbs-project';
-
   constructor(public authenticationService: AuthenticationService) {}
+
+  logout() {
+    localStorage.removeItem('User');
+    localStorage.removeItem('AuthorazationToken');
+    this.authenticationService.logout();
+  }
 }

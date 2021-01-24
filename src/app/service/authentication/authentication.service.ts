@@ -6,41 +6,21 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private readonly mockedUser = new SignInData('jvistal687', 'P@ssw0rd');
-  isAuthenticated = false;
+  isAuthenticated;
+  userLogged;
 
   constructor(private router: Router) {}
 
-  authenticate(signInData: SignInData): boolean {
-    console.log(signInData['username']);
-    if (signInData['username'] === 'jvistal') {
+  authenticate(link): boolean {
+    if (localStorage.getItem('AuthorazationToken') != null) {
       this.isAuthenticated = true;
-      this.router.navigate(['/dashboard']);
+      this.userLogged = localStorage.getItem('User');
+      this.router.navigate([link]);
       return true;
     }
-
-    // if (this.checkCredentials(signInData)) {
-    //   this.isAuthenticated = true;
-    //   this.router.navigate(['/dashboard']);
-    //   return true;
-    // }
-    // this.isAuthenticated = true;
-    // return false;
-  }
-
-  private checkCredentials(signInData: SignInData): boolean {
-    return (
-      this.checkUsername(signInData.getUsername()) &&
-      this.checkPassword(signInData.getPassword())
-    );
-  }
-
-  private checkUsername(username: String): boolean {
-    return username === this.mockedUser.getUsername();
-  }
-
-  private checkPassword(password: String): boolean {
-    return password === this.mockedUser.getPassword();
+    this.isAuthenticated = false;
+    this.router.navigate(['']);
+    return false;
   }
 
   logout() {
