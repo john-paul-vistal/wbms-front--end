@@ -68,11 +68,12 @@ export class LandingPageComponent implements OnInit {
 
   getTransactionRecordsNumber() {
     let resultData;
-    let url = 'https://wbm-system.herokuapp.com/api/transaction'; //change later to ispaid  == true
+    let url =
+      'https://wbm-system.herokuapp.com/api/transaction/paid-transaction';
     this.apiService.getData(url).subscribe(
       result => {
         resultData = result;
-        this.transactionRecordsNumber = resultData.data.length;
+        this.transactionRecordsNumber = resultData.length;
       },
       error => {
         console.log(error);
@@ -85,7 +86,7 @@ export class LandingPageComponent implements OnInit {
     this.apiService.getData(url).subscribe(
       result => {
         resultData = result;
-        this.householdNumber = resultData.data.length;
+        this.householdNumber = resultData.length;
       },
       error => {
         console.log(error);
@@ -99,7 +100,7 @@ export class LandingPageComponent implements OnInit {
     this.apiService.getData(url).subscribe(
       result => {
         resultData = result;
-        this.employeeNumber = resultData.data.length;
+        this.employeeNumber = resultData.length;
       },
       error => {
         console.log(error);

@@ -12,6 +12,7 @@ export class AppComponent {
 
   logout() {
     localStorage.removeItem('User');
+    localStorage.removeItem('UserID');
     localStorage.removeItem('AuthorazationToken');
     this.authenticationService.logout();
   }

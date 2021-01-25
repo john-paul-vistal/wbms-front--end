@@ -9,6 +9,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { SettingsComponent } from './settings/settings.component';
 import { RegHouseholdComponent } from './reg-household/reg-household.component';
+import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -49,6 +50,11 @@ const routes: Routes = [
   {
     path: 'register-household',
     component: RegHouseholdComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'household/profile',
+    component: ProfileComponent,
     canActivate: [AuthGuard]
   }
 ];

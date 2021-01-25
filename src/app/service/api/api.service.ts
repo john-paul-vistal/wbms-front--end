@@ -13,4 +13,21 @@ export class ApiService {
     });
     return this.http.get(url, { headers: httpHeaders });
   }
+
+  getSpecificData(url: string, id) {
+    const httpHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('AuthorazationToken')
+    });
+    return this.http.get(url + `/${id}`, { headers: httpHeaders });
+  }
+
+  saveData(url: string, body) {
+    const httpHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('AuthorazationToken')
+    });
+    return this.http.post(url, body, {
+      headers: httpHeaders,
+      responseType: 'text'
+    });
+  }
 }

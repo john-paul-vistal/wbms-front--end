@@ -1,0 +1,238 @@
+<div
+  class="container-fluid bg-white shadow mt-3 pageContent rounded px-4 py-2 mb-5"
+>
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-primary px-5" [routerLink]="['/household-records']">
+      Back
+    </button>
+  </div>
+  <hr />
+  <div class="bg-primary rounded px-2">
+    <div class="row p-2">
+      <div class="col-md-4">
+        <div class="d-flex justify-content-center my-3">
+          <img
+            class="rounded-circle"
+            style="width:250px;height: 250px;"
+            src="../assets/img/img1.jpg"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <div class="col-md">
+        <!-- Righ Side Content -->
+        <div class="m-3 text-white border p-2" style="position:relative">
+          <h5>Household #: {{ customerID }}</h5>
+          <button
+            class="btn btn-white shadow rounded-circle text-center px-2 py-2"
+            style="position:absolute;right:2px;top:2px"
+          >
+            <i class="fa fa-pen" style="font-size:20px"></i>
+          </button>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group mb-2" style="position: relative;">
+                <label class="icon"> <i class="fa fa-dot"></i> </label
+                >&nbsp;&nbsp;
+                <input
+                  type="text"
+                  ngModel="{{ firstName }}"
+                  name="firstName"
+                  readonly
+                  placeholder="First name"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group mb-2" style="position: relative;">
+                <label class="icon"> <i class="fa fa-dot"></i> </label
+                >&nbsp;&nbsp;
+                <input
+                  type="text"
+                  ngModel="{{ lastName }}"
+                  name="lastName"
+                  placeholder="Last Name"
+                  readonly
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group mb-2" style="position: relative;">
+                <label class="icon"> <i class="fa fa-dot"></i> </label
+                >&nbsp;&nbsp;
+                <input
+                  type="text"
+                  ngModel
+                  name="middleName"
+                  placeholder="Middle Name"
+                  readonly
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group mb-2" style="position: relative;">
+                <label class="icon"> <i class="fa fa-dot"></i> </label
+                >&nbsp;&nbsp;
+                <input
+                  type="text"
+                  ngModel="{{ email }}"
+                  name="email"
+                  readonly
+                  placeholder="Email"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group mb-2" style="position: relative;">
+                <label class="icon"> <i class="fa fa-dot"></i> </label
+                >&nbsp;&nbsp;
+                <input
+                  type="text"
+                  ngModel="{{ contactNumber }}"
+                  name="contactNumber"
+                  placeholder="Contact Number"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group mb-2" style="position: relative;">
+                <label class="icon"> <i class="fa fa-dot"></i> </label
+                >&nbsp;&nbsp;
+                <input
+                  type="text"
+                  ngModel="{{ address }}"
+                  name="address"
+                  readonly
+                  placeholder="Address"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-warning px-5 mx-1">Update</button>
+            <button class="btn btn-danger px-5 mx-1">Delete</button>
+          </div>
+        </div>
+        <!-- End Right side content -->
+      </div>
+    </div>
+    <hr />
+  </div>
+  <div class="container-fluid bg-white">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#transaction"
+          >Pending Transactions</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#transactionHistory"
+          >Transaction History</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#statistics">History</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- Pending Transaction -->
+      <div id="transaction" class="tab-pane fade in active show">
+        <table class="table mt-4">
+          <thead>
+            <tr class="shadow" style="background:rgb(29, 144, 252)">
+              <th scope="col">Transaction #</th>
+              <th scope="col">Meter Reading(/m³)</th>
+              <th scope="col">Total Amount</th>
+              <th scope="col">Reading Date</th>
+              <th scope="col">Due Date</th>
+              <th scope="col">Recorded By</th>
+              <th scope="col" class="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaction of transactions">
+              <th scope="row">{{ transaction.id }}</th>
+              <td>{{ transaction.meterReading }}</td>
+              <td>{{ transaction.total_amount }}</td>
+              <td>{{ transaction.reading_date }}</td>
+              <td>{{ transaction.due_date }}</td>
+              <td>
+                {{ transaction.recorded_by.firstName }}
+                {{ transaction.recorded_by.lastName }}
+              </td>
+              <td class="text-center">
+                <span
+                  [style.display]="
+                    transaction.ispaid === false ? 'block' : 'none'
+                  "
+                  class="btn btn-success"
+                >
+                  Pay
+                </span>
+                <span
+                  [style.display]="
+                    transaction.ispaid === true ? 'block' : 'none'
+                  "
+                  class="bg-warning px-4 py-1 rounded"
+                  style="cursor:"
+                  >Paid</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Transaction History -->
+      <div id="transactionHistory" class="tab-pane fade in">
+        <table class="table mt-4">
+          <thead>
+            <tr class="shadow" style="background:rgb(29, 144, 252)">
+              <th scope="col">Transaction #</th>
+              <th scope="col">Meter Reading(/m³)</th>
+              <th scope="col">Total Amount</th>
+              <th scope="col">Rendered Amount</th>
+              <th scope="col">Change</th>
+              <th scope="col">Transacted By</th>
+              <th scope="col">Transacted Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaction of transactions">
+              <th scope="row">{{ transaction.id }}</th>
+              <td>{{ transaction.meterReading }}</td>
+              <td>{{ transaction.total_amount }}</td>
+              <td>{{ transaction.rendered_amount }}</td>
+              <td>{{ transaction.change }}</td>
+              <td>
+                {{ transaction.recorded_by.firstName }}
+                {{ transaction.recorded_by.lastName }}
+              </td>
+              <td class="text-center">
+                {{ transaction.transactedDate }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="statistics" class="tab-pane fade in">
+        <div style="height:50%">
+          <div class="mt-4">
+            <canvas id="myChart" width="400" height="125"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

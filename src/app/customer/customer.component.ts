@@ -11,6 +11,7 @@ import { ApiService } from '../service/api/api.service';
 export class CustomerComponent implements OnInit {
   householdRecords;
   search: any;
+  page: Number = 1;
 
   constructor(
     private router: Router,
@@ -28,8 +29,7 @@ export class CustomerComponent implements OnInit {
     let url = 'https://wbm-system.herokuapp.com/api/customer';
     this.apiService.getData(url).subscribe(
       result => {
-        console.log(result);
-        resultData = result['data'];
+        resultData = result;
         this.householdRecords = resultData;
       },
       error => {
@@ -54,5 +54,9 @@ export class CustomerComponent implements OnInit {
         );
       });
     }
+  }
+
+  pageChanged(page: Event) {
+    page = page;
   }
 }
