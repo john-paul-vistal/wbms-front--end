@@ -33,20 +33,39 @@
         </div>
         <hr />
         <div class="container rounded border px-4">
-          <form #signInForm="ngForm" autocomplete="off">
+          <form
+            #Form="ngForm"
+            (ngSubmit)="onSubmit(Form.value)"
+            autocomplete="off"
+          >
+            <input
+              type="hidden"
+              name="recordedBy"
+              ngModel="{{ authenticationService.userID }}"
+              id="recordedBy"
+            />
+
             <div class="row">
               <div class="col-sm-4">
-                <div class="form-group mb-2" style="position: relative;">
+                <!-- <div class="form-group mb-2" style="position: relative;">
                   <label class="icon"> <i class="fa fa-user"></i> </label>
                   &nbsp;&nbsp;
                   <input
                     type="text"
                     ngModel
-                    name="Customer_id"
+                    name="customer_id"
                     placeholder="Customer ID"
                     required
                   />
-                </div>
+                </div> -->
+                <select class="custom-select" id="inputGroupSelect01">
+                  <option selected
+                    ><input type="text" class="form-control"
+                  /></option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
               </div>
 
               <div class="col-sm-5">
@@ -72,6 +91,8 @@
                     class="mt-4 reading_date"
                     type="date"
                     id="reading_date"
+                    max="{{ today }}"
+                    ngModel
                     name="reading_date"
                   />
                 </div>

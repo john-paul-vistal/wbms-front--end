@@ -107,4 +107,8 @@ export class LandingPageComponent implements OnInit {
       }
     );
   }
+
+  toggle() {
+    $('#wrapper').toggleClass('toggled');
+  }
 }

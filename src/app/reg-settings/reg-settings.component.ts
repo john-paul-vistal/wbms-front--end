@@ -26,6 +26,7 @@ export class RegSettingsComponent implements OnInit {
 
   onSubmit(data) {
     if (this.checkForm(data) == true) {
+      this.saving = true;
       console.log(data);
       let url = 'https://wbm-system.herokuapp.com/api/settings/create';
       this.apiService.saveData(url, data).subscribe(

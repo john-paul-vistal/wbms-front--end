@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
   isAuthenticated;
   userLogged;
+  userID;
   userLoggedLevel;
   activateHousehold;
   activateEmployee;
@@ -18,6 +19,7 @@ export class AuthenticationService {
     if (localStorage.getItem('AuthorazationToken') != null) {
       this.isAuthenticated = true;
       this.userLogged = localStorage.getItem('User');
+      this.userID = localStorage.getItem('UserID');
       this.checkLevel();
       this.userLoggedLevel = localStorage.getItem('UserType');
       this.router.navigate([link]);

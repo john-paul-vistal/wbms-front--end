@@ -40,46 +40,24 @@
         <table class="table">
           <thead>
             <tr class="shadow" style="background:rgb(29, 144, 252)">
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">Transaction #</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Reading Date</th>
+              <th scope="col">Recorded By</th>
               <th scope="col" class="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td class="text-center">
-                <button class="btn btn-info">View</button>
+            <tr *ngFor="let item of transactionData">
+              <th scope="row">{{ item.id }}</th>
+              <td>
+                {{ item.customer.firstName }} {{ item.customer.lastName }}
               </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td class="text-center">
-                <button class="btn btn-info">View</button>
+              <td>{{ item.reading_date }}</td>
+              <td>
+                {{ item.recorded_by.firstName }}
+                {{ item.recorded_by.lastName }}
               </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td class="text-center">
-                <button class="btn btn-info">View</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
               <td class="text-center">
                 <button class="btn btn-info">View</button>
               </td>

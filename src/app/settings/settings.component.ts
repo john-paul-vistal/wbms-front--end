@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class SettingsComponent implements OnInit {
   settings;
+  deleted;
   constructor(
     private authenticationService: AuthenticationService,
     private apiService: ApiService,
@@ -25,7 +26,6 @@ export class SettingsComponent implements OnInit {
     let url = 'https://wbm-system.herokuapp.com/api/settings';
     this.apiService.getData(url).subscribe(
       result => {
-        console.log(result);
         this.settings = result;
       },
       error => {
@@ -34,19 +34,20 @@ export class SettingsComponent implements OnInit {
     );
   }
 
-  onClickDelete() {
-    console.log('slkdsdflsd');
-    // let url = 'https://wbm-system.herokuapp.com/api/settings/create';
-    // this.apiService.deletePermmanently(url).subscribe(
-    //   result => {
-    //     setTimeout(() => {
-    //       this.router.navigate(['/settings']);
-    //     }, 1000);
-    //     console.log(result);
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   }
-    // );
+  onClickDelete(id) {
+    let url = 'https://wbm-system.herokuapp.com/api/settings/delete/';
+    this.apiService.deletePermmanently(url, id).subscribe(
+      result => {
+        this.deleted = true;
+        setTimeout(() => {
+          this.deleted = false;
+          this.loadSettingsData();
+        }, 1000);
+        console.log(result);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

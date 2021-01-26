@@ -118,6 +118,12 @@
                 class="btn btn-success px-5 mx-1 my-2"
                 [disabled]="saving == true"
               >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  *ngIf="saving"
+                ></span>
                 Save
               </button>
             </div>

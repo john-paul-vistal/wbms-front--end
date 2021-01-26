@@ -42,6 +42,43 @@
         <hr />
 
         <table class="table">
+          <div
+            class="text-left mt-3"
+            style="position:absolute;left: 250px;"
+            *ngIf="deleted"
+          >
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 130.2 130.2"
+            >
+              <circle
+                class="path circle"
+                fill="none"
+                stroke="#73AF55"
+                stroke-width="6"
+                stroke-miterlimit="10"
+                cx="65.1"
+                cy="65.1"
+                r="62.1"
+              />
+              <polyline
+                class="path check"
+                fill="none"
+                stroke="#73AF55"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-miterlimit="10"
+                points="100.2,40.2 51.5,88.8 29.8,67.5 "
+              />
+            </svg>
+            <h2
+              class="text-center deletedMessage"
+              style="position:relative;left:150px"
+            >
+              Deleted Successfully
+            </h2>
+          </div>
           <thead>
             <tr class="shadow" style="background:rgb(29, 144, 252)">
               <th scope="col" class="text-center">Setting Name</th>
@@ -55,7 +92,10 @@
               <td class="text-center">{{ setting.value }}</td>
               <td class="text-center">
                 <button class="btn btn-warning mx-1">Update</button>
-                <button class="btn btn-danger mx-1" (click)="onClickDelete()">
+                <button
+                  class="btn btn-danger mx-1"
+                  (click)="onClickDelete(setting.id)"
+                >
                   Delete
                 </button>
               </td>
