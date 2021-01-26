@@ -8,8 +8,12 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { CustomerComponent } from './customer/customer.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { SettingsComponent } from './settings/settings.component';
-import { RegHouseholdComponent } from './reg-household/reg-household.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RegHouseholdComponent } from './reg-household/reg-household.component';
+import { RegReadingComponent } from './reg-reading/reg-reading.component';
+import { RegEmployeeComponent } from './reg-employee/reg-employee.component';
+import { RegSettingsComponent } from './reg-settings/reg-settings.component';
+
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -48,13 +52,28 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'household/profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'register-household',
     component: RegHouseholdComponent,
     canActivate: [AuthGuard]
   },
   {
-    path: 'household/profile',
-    component: ProfileComponent,
+    path: 'register-reading',
+    component: RegReadingComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'register-employee',
+    component: RegEmployeeComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'register-setting',
+    component: RegSettingsComponent,
     canActivate: [AuthGuard]
   }
 ];

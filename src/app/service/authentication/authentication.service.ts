@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { SignInData } from 'src/app/model/signInData';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,6 +7,10 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
   isAuthenticated;
   userLogged;
+  userLoggedLevel;
+  activateHousehold;
+  activateEmployee;
+  activateSetting;
 
   constructor(private router: Router) {}
 
@@ -15,6 +18,8 @@ export class AuthenticationService {
     if (localStorage.getItem('AuthorazationToken') != null) {
       this.isAuthenticated = true;
       this.userLogged = localStorage.getItem('User');
+      this.checkLevel();
+      this.userLoggedLevel = localStorage.getItem('UserType');
       this.router.navigate([link]);
       return true;
     }
@@ -26,5 +31,21 @@ export class AuthenticationService {
   logout() {
     this.isAuthenticated = false;
     this.router.navigate(['']);
+  }
+
+  checkLevel() {
+    if (localStorage.getItem('UserType') == 'ADMIN') {
+      this.activateHousehold = true;
+      this.activateEmployee = true;
+      this.activateSetting = true;
+    } else if (localStorage.getItem('UserType') == 'MANAGER') {
+      this.activateHousehold = true;
+      this.activateEmployee = false;
+      this.activateSetting = false;
+    } else {
+      this.activateHousehold = false;
+      this.activateEmployee = false;
+      this.activateSetting = false;
+    }
   }
 }

@@ -12,7 +12,7 @@
         <ol class="breadcrumb bg-white mb-1 py-3 px-3 ml-3">
           <li class="breadcrumb-item active" aria-current="page">Home</li>
           <li class="breadcrumb-item active" aria-current="page">
-            Create Transaction
+            Settings
           </li>
         </ol>
       </div>
@@ -31,7 +31,12 @@
               type="text"
               style="width:300px;padding-left:40px"
             />
-            <button class="btn btn-primary ml-2">Add Settings</button>
+            <button
+              class="btn btn-primary ml-2"
+              [routerLink]="['/register-setting']"
+            >
+              Add Settings
+            </button>
           </div>
         </div>
         <hr />
@@ -39,52 +44,20 @@
         <table class="table">
           <thead>
             <tr class="shadow" style="background:rgb(29, 144, 252)">
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col" class="text-center">Setting Name</th>
+              <th scope="col" class="text-center">Value</th>
               <th scope="col" class="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
+            <tr *ngFor="let setting of settings">
+              <td class="text-center">{{ setting.settingName }}</td>
+              <td class="text-center">{{ setting.value }}</td>
               <td class="text-center">
                 <button class="btn btn-warning mx-1">Update</button>
-                <button class="btn btn-danger mx-1">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-              <td class="text-center">
-                <button class="btn btn-warning mx-1">Update</button>
-                <button class="btn btn-danger mx-1">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td class="text-center">
-                <button class="btn btn-warning mx-1">Update</button>
-                <button class="btn btn-danger mx-1">Delete</button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td class="text-center">
-                <button class="btn btn-warning mx-1">Update</button>
-                <button class="btn btn-danger mx-1">Delete</button>
+                <button class="btn btn-danger mx-1" (click)="onClickDelete()">
+                  Delete
+                </button>
               </td>
             </tr>
           </tbody>

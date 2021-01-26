@@ -12,10 +12,10 @@
         <ol class="breadcrumb bg-white mb-1 py-3 px-3 ml-3">
           <li class="breadcrumb-item active" aria-current="page">Home</li>
           <li class="breadcrumb-item active" aria-current="page">
-            Household Records
+            Employee
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-            Register Household
+            Register Employee
           </li>
         </ol>
       </div>
@@ -23,9 +23,9 @@
 
       <div class="bg-white shadow rounded my-3 p-4">
         <div class="d-flex justify-content-between">
-          <h4>Register Household</h4>
+          <h4>Register Employee</h4>
           <button
-            [routerLink]="['/household-records']"
+            [routerLink]="['/employee']"
             class="btn btn-primary px-5"
             [disabled]="saving == true"
           >
@@ -67,7 +67,7 @@
             </svg>
 
             <div class="row">
-              <div class="col-md">
+              <div class="col-sm">
                 <div class="form-group mb-2" style="position: relative;">
                   <label class="icon"> <i class="fa fa-user"></i> </label
                   >&nbsp;&nbsp;
@@ -80,10 +80,10 @@
                   />
                 </div>
                 <p class="text-left text-danger" *ngIf="emptyFirstName">
-                  First name is required!
+                  Firstname is required
                 </p>
               </div>
-              <div class="col-md">
+              <div class="col-sm">
                 <div class="form-group mb-2" style="position: relative;">
                   <label class="icon"> <i class="fa fa-dot"></i> </label
                   >&nbsp;&nbsp;
@@ -96,10 +96,11 @@
                   />
                 </div>
                 <p class="text-left text-danger" *ngIf="emptyLastName">
-                  Last name is required!
+                  Lastname is required
                 </p>
               </div>
-              <div class="col-md">
+
+              <div class="col-sm">
                 <div class="form-group mb-2" style="position: relative;">
                   <label for="email" class="icon">
                     <i class="fa fa-dot"></i> </label
@@ -113,7 +114,56 @@
                   />
                 </div>
                 <p class="text-left text-danger" *ngIf="emptyMiddleName">
-                  Middle name is required!
+                  Middlename is required
+                </p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md">
+                <div class="form-group mb-2" style="position: relative;">
+                  <label for="userType" class="icon">
+                    <i class="fa fa-dot"></i> </label
+                  >&nbsp;&nbsp;
+                  <div class="">
+                    <select
+                      class="w-100 dropdown"
+                      ngModel
+                      name="usertype"
+                      id="userType"
+                    >
+                      <option value="">User Type</option>
+                      <option value="ADMIN">Admin</option>
+                      <option value="MANAGER">Manager</option>
+                      <option value="CLERK">Clerk</option>
+                    </select>
+                  </div>
+                </div>
+                <p class="text-left text-danger" *ngIf="emptyUserType">
+                  User Type is required
+                </p>
+              </div>
+
+              <div class="col-md">
+                <div class="form-group mb-2" style="position: relative;">
+                  <label for="gender" class="icon">
+                    <i class="fa fa-dot"></i> </label
+                  >&nbsp;&nbsp;
+                  <div class="">
+                    <select
+                      class="w-100 dropdown"
+                      ngModel
+                      name="gender"
+                      id="gender"
+                    >
+                      <option value="">Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                </div>
+                <p class="text-left text-danger" *ngIf="emptyGender">
+                  Gender is required
                 </p>
               </div>
             </div>
@@ -130,6 +180,9 @@
                     required
                   />
                 </div>
+                <p class="text-left text-danger" *ngIf="emptyEmail">
+                  Email is required
+                </p>
               </div>
               <div class="col-md">
                 <div class="form-group mb-2" style="position: relative;">
@@ -165,28 +218,11 @@
                   Address is required!
                 </p>
               </div>
-              <div class="col-md-5">
-                <div class="form-group mb-2" style="position: relative;">
-                  <label class="icon"> <i class="fa fa-dot"></i> </label
-                  >&nbsp;&nbsp;
-                  <input
-                    type="text"
-                    ngModel
-                    name="streetAddress"
-                    placeholder="Street Address/Purok"
-                    required
-                  />
-                </div>
-                <p class="text-left text-danger" *ngIf="emptypurok">
-                  Street Address / Purok is required!
-                </p>
-              </div>
             </div>
             <div class="d-flex justify-content-end">
               <button
                 class="btn btn-danger px-5 mx-1 my-2"
-                [routerLink]="['/household-records']"
-                routerLinkActive="router-link-active"
+                [routerLink]="['/employee']"
                 [disabled]="saving == true"
               >
                 Cancel

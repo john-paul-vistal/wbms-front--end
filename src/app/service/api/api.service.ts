@@ -26,8 +26,25 @@ export class ApiService {
       Authorization: 'Bearer ' + localStorage.getItem('AuthorazationToken')
     });
     return this.http.post(url, body, {
-      headers: httpHeaders,
-      responseType: 'text'
+      headers: httpHeaders
+    });
+  }
+
+  logout(url: string, body) {
+    const httpHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('AuthorazationToken')
+    });
+    return this.http.post(url, body, {
+      headers: httpHeaders
+    });
+  }
+
+  deletePermmanently(url: string, id) {
+    const httpHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('AuthorazationToken')
+    });
+    return this.http.delete(url + `id`, {
+      headers: httpHeaders
     });
   }
 }

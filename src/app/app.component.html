@@ -127,17 +127,17 @@
           </div>
         </div>
       </li>
-      <li>
+      <li *ngIf="authenticationService.activateHousehold">
         <a [routerLink]="['household-records']" routerLinkActive="activeLink"
           ><i class="fa fa-users mr-3"></i>Household</a
         >
       </li>
-      <li>
+      <li *ngIf="authenticationService.activateEmployee">
         <a [routerLink]="['employee']" routerLinkActive="activeLink"
           ><i class="fas fa-user-tie mr-3"></i>Employee</a
         >
       </li>
-      <li>
+      <li *ngIf="authenticationService.activateSetting">
         <a [routerLink]="['settings']" routerLinkActive="activeLink"
           ><i class="fas fa-wrench mr-3"></i>Settings</a
         >

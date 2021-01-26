@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
           result => {
             console.log('Successfully Logged In');
             localStorage.setItem('UserID', result['user']['id']);
+            localStorage.setItem('UserType', result['user']['usertype']);
             localStorage.setItem('AuthorazationToken', result['token']);
             localStorage.setItem(
               'User',

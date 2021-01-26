@@ -16,6 +16,9 @@ import { EmployeeComponent } from './employee/employee.component';
 import { SettingsComponent } from './settings/settings.component';
 import { RegHouseholdComponent } from './reg-household/reg-household.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RegEmployeeComponent } from './reg-employee/reg-employee.component';
+import { RegSettingsComponent } from './reg-settings/reg-settings.component';
+import { RegReadingComponent } from './reg-reading/reg-reading.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { ProfileComponent } from './profile/profile.component';
     EmployeeComponent,
     SettingsComponent,
     RegHouseholdComponent,
-    ProfileComponent
+    ProfileComponent,
+    RegEmployeeComponent,
+    RegSettingsComponent,
+    RegReadingComponent
   ],
   imports: [
     BrowserModule,

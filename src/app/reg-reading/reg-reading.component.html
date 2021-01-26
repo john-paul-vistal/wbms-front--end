@@ -1,0 +1,98 @@
+<div id="page-content-wrapper">
+  <div class="page-content">
+    <div class="container">
+      <!-- breadcrumb -->
+      <div class="bg-white shadow  mt-3 rounded" style="position: relative;">
+        <button
+          class="btn btn-primary rounded-circle text-center mt-2 ml-1 float-left"
+          style="padding-left:13px;padding-right:13px;padding-top:8px;padding-bottom:8px;"
+        >
+          <i class="fa fa-bars"></i>
+        </button>
+        <ol class="breadcrumb bg-white mb-1 py-3 px-3 ml-3">
+          <li class="breadcrumb-item active" aria-current="page">Home</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Household Records
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Register Household
+          </li>
+        </ol>
+      </div>
+      <!-- breadcrumb -->
+
+      <div class="bg-white shadow rounded my-3 p-4">
+        <div class="d-flex justify-content-between">
+          <h4>Register Reading</h4>
+          <button
+            [routerLink]="['/pending-transactions']"
+            class="btn btn-primary px-5"
+          >
+            <i class="fa fa-arrow-left"></i>
+          </button>
+        </div>
+        <hr />
+        <div class="container rounded border px-4">
+          <form #signInForm="ngForm" autocomplete="off">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group mb-2" style="position: relative;">
+                  <label class="icon"> <i class="fa fa-user"></i> </label>
+                  &nbsp;&nbsp;
+                  <input
+                    type="text"
+                    ngModel
+                    name="Customer_id"
+                    placeholder="Customer ID"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="col-sm-5">
+                <div class="form-group mb-2" style="position: relative;">
+                  <label class="icon">
+                    <i class="fa fa-tachometer-alt"></i>
+                  </label>
+                  &nbsp;&nbsp;
+                  <input
+                    type="text"
+                    ngModel
+                    name="meterReading"
+                    placeholder="Cubic meter"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="form-group mb-2" style="position: relative;">
+                  <!-- <label class="icon"> <i class="fa fa-dot"></i> </label> -->
+                  <input
+                    class="mt-4 reading_date"
+                    type="date"
+                    id="reading_date"
+                    name="reading_date"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+              <button
+                class="btn btn-danger px-5 mx-1 my-2"
+                [routerLink]="['/pending-transactions']"
+                routerLinkActive="router-link-active"
+              >
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-success px-5 mx-1 my-2">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
