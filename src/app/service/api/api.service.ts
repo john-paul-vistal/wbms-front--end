@@ -44,7 +44,7 @@ export class ApiService {
       Authorization: 'Bearer ' + localStorage.getItem('AuthorazationToken')
     });
 
-    return this.http.put(url + `${id}`, '', {
+    return this.http.delete(url + `${id}`, {
       headers: httpHeaders
     });
   }

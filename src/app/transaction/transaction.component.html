@@ -35,45 +35,43 @@
         </div>
         <hr />
 
-        <table class="table">
+        <table class="table mt-4 shadow">
           <thead>
             <tr class="shadow" style="background:rgb(29, 144, 252)">
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">Transaction #</th>
+              <th scope="col">Customer</th>
+              <th scope="col">Meter Reading(/m³)</th>
+              <th scope="col">Total Amount</th>
+              <th scope="col">Rendered Amount</th>
+              <th scope="col">Change</th>
+              <th scope="col">Transacted By</th>
+              <th scope="col">Transacted Date</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
+            <tr *ngFor="let transaction of transactionRecords">
+              <th scope="row">{{ transaction.id }}</th>
+              <td>{{ transaction.meterReading }}</td>
+              <td>{{ transaction.total_amount }}</td>
+              <td>{{ transaction.rendered_amount }}</td>
+              <td>{{ transaction.change }}</td>
+              <td>
+                {{ transaction.recorded_by.firstName }}
+                {{ transaction.recorded_by.lastName }}
+              </td>
+              <td class="text-center">
+                {{ transaction.transactedDate }}
+              </td>
             </tr>
           </tbody>
         </table>
+        <!-- No History -->
+        <h5 class="text-center" *ngIf="noRecords">
+          No Data Available
+        </h5>
+        <!-- No History -->
         <div class="d-flex justify-content-end">
-          <button class="btn btn-primary mx-1">Prev</button>
-          <button class="btn btn-primary mx-1">Next</button>
+          <!-- Pagination Buttons Here -->
         </div>
       </div>
     </div>

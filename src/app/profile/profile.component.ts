@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'node_modules/chart.js';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../service/api/api.service';
 
 @Component({
@@ -16,15 +16,35 @@ export class ProfileComponent implements OnInit {
   email;
   contactNumber;
   address;
-  transactions;
-  constructor(private route: ActivatedRoute, private apiService: ApiService) {}
+  Authorized = false;
+
+  noHistory = false;
+  noPending = false;
+
+  pendingTransaction;
+  paidTransaction;
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const householdID: string = this.route.snapshot.queryParamMap.get(
       'householdID'
     );
+
+    const parent: string = this.route.snapshot.queryParamMap.get('parent');
+
+    if (parent != '1') {
+      this.Authorized = true;
+    } else {
+      this.Authorized = false;
+    }
+
     this.loadInfoData(householdID);
-    this.loadTransactionData(householdID);
+    this.loadPendingTransactionData(householdID);
+    this.loadPaidTransactionData(householdID);
     this.loadHistory();
   }
 
@@ -85,15 +105,39 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  loadTransactionData(householdID) {
+  loadPendingTransactionData(householdID) {
     let url =
-      'https://wbm-system.herokuapp.com/api/transaction/show-transactions';
+      'https://wbm-system.herokuapp.com/api/transaction/show-pending-transaction';
     this.apiService.getSpecificData(url, householdID).subscribe(
       result => {
         console.log(result);
-        this.transactions = result;
+        this.pendingTransaction = result;
+
+        if (this.pendingTransaction.length == 0) {
+          this.noPending = true;
+        }
       },
       error => {
+        console.log('Error');
+        console.log(error);
+      }
+    );
+  }
+
+  loadPaidTransactionData(householdID) {
+    let url =
+      'https://wbm-system.herokuapp.com/api/transaction/show-paid-transaction';
+    this.apiService.getSpecificData(url, householdID).subscribe(
+      result => {
+        console.log(result);
+        this.paidTransaction = result;
+
+        if (this.paidTransaction.length == 0) {
+          this.noHistory = true;
+        }
+      },
+      error => {
+        console.log('Error');
         console.log(error);
       }
     );
@@ -103,7 +147,6 @@ export class ProfileComponent implements OnInit {
     let url = 'https://wbm-system.herokuapp.com/api/customer/show';
     this.apiService.getSpecificData(url, householdID).subscribe(
       result => {
-        console.log(result);
         this.customer = result;
         this.customerID = result['id'];
         this.firstName = result['firstName'];
@@ -116,5 +159,14 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  navigate() {
+    const parent: string = this.route.snapshot.queryParamMap.get('parent');
+    if (parent == '1') {
+      this.router.navigate(['/pending-transactions']);
+    } else if (parent == '2') {
+      this.router.navigate(['/household-records']);
+    }
   }
 }

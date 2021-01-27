@@ -2,7 +2,7 @@
   class="container-fluid bg-white shadow mt-3 pageContent rounded px-4 py-2 mb-5"
 >
   <div class="d-flex justify-content-end">
-    <button class="btn btn-primary px-5" [routerLink]="['/household-records']">
+    <button class="btn btn-primary px-5" (click)="navigate()">
       Back
     </button>
   </div>
@@ -119,7 +119,7 @@
               </div>
             </div>
           </div>
-          <div class="d-flex justify-content-end">
+          <div class="d-flex justify-content-end" *ngIf="Authorized">
             <button class="btn btn-warning px-5 mx-1">Update</button>
           </div>
         </div>
@@ -148,7 +148,7 @@
     <div class="tab-content">
       <!-- Pending Transaction -->
       <div id="transaction" class="tab-pane fade in active show">
-        <table class="table mt-4">
+        <table class="table mt-4 shadow">
           <thead>
             <tr class="shadow" style="background:rgb(29, 144, 252)">
               <th scope="col">Transaction #</th>
@@ -161,7 +161,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let transaction of transactions">
+            <!-- No History -->
+            <tr *ngIf="noPending">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><h4>No Pending Transaction Yet</h4></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <!-- No History -->
+            <tr *ngFor="let transaction of pendingTransaction">
               <th scope="row">{{ transaction.id }}</th>
               <td>{{ transaction.meterReading }}</td>
               <td>{{ transaction.total_amount }}</td>
@@ -194,7 +205,7 @@
       </div>
       <!-- Transaction History -->
       <div id="transactionHistory" class="tab-pane fade in">
-        <table class="table mt-4">
+        <table class="table mt-4 shadow">
           <thead>
             <tr class="shadow" style="background:rgb(29, 144, 252)">
               <th scope="col">Transaction #</th>
@@ -207,7 +218,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let transaction of transactions">
+            <!-- No History -->
+            <tr *ngIf="noHistory">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><h4>No Transaction History Yet</h4></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <!-- No History -->
+            <tr *ngFor="let transaction of paidTransaction">
               <th scope="row">{{ transaction.id }}</th>
               <td>{{ transaction.meterReading }}</td>
               <td>{{ transaction.total_amount }}</td>

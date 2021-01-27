@@ -3,6 +3,7 @@
 <nav
   class="mb-1 navbar navbar-expand-lg navbar-dark navbar-fixed fixed-top topNav"
   *ngIf="authenticationService.isAuthenticated"
+  style="z-index:99999999"
 >
   <a class="navbar-brand" [routerLink]="['dashboard']">
     <img
@@ -26,12 +27,12 @@
   </button>
   <div class="collapse navbar-collapse" id="mainNav">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item mr-1 mt-1 ">
+      <!-- <li class="nav-item mr-1 mt-1 ">
         <a class="nav-link">
           <i class="fas fa-envelope fa-lg mx-1"></i>
           <span class="badge badge-dot"></span>
         </a>
-      </li>
+      </li> -->
       <!-- <li class="nav-item mr-2 mt-1">
         <a class="nav-link" href="#">
           <i class="fas fa-truck mx-1"></i>

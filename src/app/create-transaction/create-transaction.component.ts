@@ -10,6 +10,7 @@ import { ApiService } from '../service/api/api.service';
 })
 export class CreateTransactionComponent implements OnInit {
   transactionData;
+  noData = false;
   constructor(
     private authenticationService: AuthenticationService,
     private apiService: ApiService
@@ -22,12 +23,15 @@ export class CreateTransactionComponent implements OnInit {
 
   loadData() {
     let resultData;
-    let url = 'https://wbm-system.herokuapp.com/api/transaction';
+    let url =
+      'https://wbm-system.herokuapp.com/api/transaction/pending-transaction';
     this.apiService.getData(url).subscribe(
       result => {
         resultData = result;
         this.transactionData = resultData;
-        console.log(this.transactionData);
+        if (this.transactionData.length == 0) {
+          this.noData = true;
+        }
       },
       error => {
         console.log(error);

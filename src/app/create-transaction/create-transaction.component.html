@@ -59,15 +59,18 @@
                 {{ item.recorded_by.lastName }}
               </td>
               <td class="text-center">
-                <button class="btn btn-info">View</button>
+                <a
+                  href="household/profile?householdID={{
+                    item.customer.id
+                  }}&parent=1"
+                  class="btn btn-info"
+                  >View</a
+                >
               </td>
             </tr>
           </tbody>
+          <h2 *ngIf="noData" class="text-center">NO DATA YET</h2>
         </table>
-        <div class="d-flex justify-content-end">
-          <button class="btn btn-primary mx-1">Prev</button>
-          <button class="btn btn-primary mx-1">Next</button>
-        </div>
       </div>
     </div>
   </div>
