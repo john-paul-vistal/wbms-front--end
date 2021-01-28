@@ -121,3 +121,22 @@ svg {
   left: 35%;
   margin-top: 25%;
 }
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #reciept,
+  #reciept * {
+    visibility: visible;
+  }
+  #reciept {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+#reciept {
+  -webkit-print-color-adjust: exact;
+}

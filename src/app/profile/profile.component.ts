@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
   loadingInfoData = false;
   saving = false;
   saved = false;
+  originalContents;
 
   customer;
   customerID;
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
   meterReading = undefined;
   totalAmount = undefined;
   rendered_amount = null;
+  renderedAmount = undefined;
   teller = localStorage.getItem('User');
   id = localStorage.getItem('UserID');
 
@@ -64,7 +66,7 @@ export class ProfileComponent implements OnInit {
     this.loadInfoData(this.householdID);
     this.loadPendingTransactionData(this.householdID);
     this.loadPaidTransactionData(this.householdID);
-   
+    this.originalContents = document.body.innerHTML;
   }
 
   dataYear = []
@@ -164,15 +166,6 @@ export class ProfileComponent implements OnInit {
             text: "Monthly Payment Statistics",
             fontSize: 18
           }
-        // scales: {
-        //   yAxes: [
-        //     {
-        //       ticks: {
-        //         beginAtZero: true
-        //       }
-        //     }
-        //   ]
-        // },
       }
     });
   }
@@ -298,6 +291,7 @@ export class ProfileComponent implements OnInit {
 
     if (this.notEnough == false) {
       this.change = data.rendered_amount - this.totalAmount;
+      this.renderedAmount = data.rendered_amount;
       return true;
     }
   }
@@ -311,16 +305,16 @@ export class ProfileComponent implements OnInit {
       .subscribe(
         result => {
           console.log(result);
-          this.printReceipt('reciept');
           this.saved = true;
           setTimeout(() => {
             this.saved = false;
             ($('#payment') as any).modal('hide');
+            this.printReceipt();
+            this.saving = false;
+            this.loadPendingTransactionData(this.householdID);
+            this.loadPaidTransactionData(this.householdID);
+            this.cancel();
           }, 800);
-          this.saving = false;
-          this.loadPendingTransactionData(this.householdID);
-          this.loadPaidTransactionData(this.householdID);
-          this.cancel();
         },
         error => {
           console.log(error);
@@ -332,23 +326,11 @@ export class ProfileComponent implements OnInit {
     this.rendered_amount = undefined;
   }
 
-  printReceipt(elem) {
-    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-    mywindow.document.write(
-      '<html><head><title>' + document.title + '</title>'
-    );
-    mywindow.document.write('</head><body >');
-    mywindow.document.write('<h1>' + document.title + '</h1>');
-    mywindow.document.write(document.getElementById(elem).innerHTML);
-    mywindow.document.write('</body></html>');
-
-    // mywindow.document.close(); // necessary for IE >= 10
-    // mywindow.focus(); // necessary for IE >= 10*/
-
-    // mywindow.print();
-    // mywindow.close();
-
-    return true;
+  printReceipt() {
+    var printContents = document.getElementById('reciept').innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = this.originalContents;
+    window.location.reload(true);
   }
 }

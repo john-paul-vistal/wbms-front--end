@@ -1,6 +1,4 @@
-<div
-  class="container-fluid bg-white shadow mt-3 pageContent rounded px-4 py-2 mb-5"
->
+<div class="container-fluid bg-white shadow mt-3 pageContent rounded px-4 py-2 mb-5">
   <div class="d-flex justify-content-end">
     <button class="btn btn-primary px-5" (click)="navigate()">
       Back
@@ -11,12 +9,7 @@
     <div class="row p-2">
       <div class="col-md-4">
         <div class="d-flex justify-content-center my-3">
-          <img
-            class="rounded-circle"
-            style="width:250px;height: 250px;"
-            src="../assets/img/wbms-customer.jpg"
-            alt=""
-          />
+          <img class="rounded-circle" style="width:250px;height: 250px;" src="../assets/img/wbms-customer.jpg" alt="" />
         </div>
       </div>
 
@@ -34,89 +27,44 @@
           <div class="row">
             <div class="col-md">
               <div class="form-group mb-2" style="position: relative;">
-                <label class="icon"> <i class="fa fa-dot"></i> </label
-                >&nbsp;&nbsp;
-                <input
-                  type="text"
-                  ngModel="{{ firstName }}"
-                  name="firstName"
-                  readonly
-                  placeholder="First name"
-                  required
-                />
+                <label class="icon"> <i class="fa fa-dot"></i> </label>&nbsp;&nbsp;
+                <input type="text" ngModel="{{ firstName }}" name="firstName" readonly placeholder="First name"
+                  required />
               </div>
             </div>
             <div class="col-md">
               <div class="form-group mb-2" style="position: relative;">
-                <label class="icon"> <i class="fa fa-dot"></i> </label
-                >&nbsp;&nbsp;
-                <input
-                  type="text"
-                  ngModel="{{ lastName }}"
-                  name="lastName"
-                  placeholder="Last Name"
-                  readonly
-                  required
-                />
+                <label class="icon"> <i class="fa fa-dot"></i> </label>&nbsp;&nbsp;
+                <input type="text" ngModel="{{ lastName }}" name="lastName" placeholder="Last Name" readonly required />
               </div>
             </div>
             <div class="col-md">
               <div class="form-group mb-2" style="position: relative;">
-                <label class="icon"> <i class="fa fa-dot"></i> </label
-                >&nbsp;&nbsp;
-                <input
-                  type="text"
-                  ngModel
-                  name="middleName"
-                  placeholder="Middle Name"
-                  readonly
-                  required
-                />
+                <label class="icon"> <i class="fa fa-dot"></i> </label>&nbsp;&nbsp;
+                <input type="text" ngModel name="middleName" placeholder="Middle Name" readonly required />
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md">
               <div class="form-group mb-2" style="position: relative;">
-                <label class="icon"> <i class="fa fa-dot"></i> </label
-                >&nbsp;&nbsp;
-                <input
-                  type="text"
-                  ngModel="{{ email }}"
-                  name="email"
-                  readonly
-                  placeholder="Email"
-                  required
-                />
+                <label class="icon"> <i class="fa fa-dot"></i> </label>&nbsp;&nbsp;
+                <input type="text" ngModel="{{ email }}" name="email" readonly placeholder="Email" required />
               </div>
             </div>
             <div class="col-md">
               <div class="form-group mb-2" style="position: relative;">
-                <label class="icon"> <i class="fa fa-dot"></i> </label
-                >&nbsp;&nbsp;
-                <input
-                  type="text"
-                  ngModel="{{ contactNumber }}"
-                  name="contactNumber"
-                  placeholder="Contact Number"
-                  required
-                />
+                <label class="icon"> <i class="fa fa-dot"></i> </label>&nbsp;&nbsp;
+                <input type="text" ngModel="{{ contactNumber }}" name="contactNumber" placeholder="Contact Number"
+                  required />
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md">
               <div class="form-group mb-2" style="position: relative;">
-                <label class="icon"> <i class="fa fa-dot"></i> </label
-                >&nbsp;&nbsp;
-                <input
-                  type="text"
-                  ngModel="{{ address }}"
-                  name="address"
-                  readonly
-                  placeholder="Address"
-                  required
-                />
+                <label class="icon"> <i class="fa fa-dot"></i> </label>&nbsp;&nbsp;
+                <input type="text" ngModel="{{ address }}" name="address" readonly placeholder="Address" required />
               </div>
             </div>
           </div>
@@ -133,14 +81,10 @@
   <div class="container-fluid bg-white">
     <ul class="nav nav-tabs">
       <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="#transaction"
-          >Pending Transactions</a
-        >
+        <a class="nav-link active" data-toggle="tab" href="#transaction">Pending Transactions</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#transactionHistory"
-          >Transaction History</a
-        >
+        <a class="nav-link" data-toggle="tab" href="#transactionHistory">Transaction History</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#statistics">Statistics</a>
@@ -410,7 +354,7 @@
   </div>
   <!-- MODAL END HERE -->
   <!-- FOR PRINT -->
-  <div id="reciept">
+  <div id="reciept" style="display:none">
     <div class="modal-dialog modal-lg">
       <div
         class="modal-content px-4"
@@ -459,11 +403,15 @@
               </tr>
               <tr class="border-bottom border-info">
                 <td><h6>RENDERED AMOUNT</h6></td>
-                <td><h6>0.00</h6></td>
+                <td>
+                  <h6>{{ renderedAmount }}</h6>
+                </td>
               </tr>
               <tr class="border-bottom border-info">
                 <td><h6>CHANGE</h6></td>
-                <td><h6>0.00</h6></td>
+                <td>
+                  <h6>{{ change | number: "1.2-2" }}</h6>
+                </td>
               </tr>
             </table>
           </div>

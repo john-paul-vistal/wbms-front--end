@@ -1,0 +1,126 @@
+<div class="container-fluid bg-white shadow mt-3 pageContent rounded px-4 py-2 mb-5">
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-primary px-5" [routerLink]="['/employee']">
+            Back
+        </button>
+    </div>
+    <hr />
+    <div class="">
+        <div class="container ">
+            <div class="page-content page-container container" id="page-content">
+                <div class="padding">
+                    <div class="row container d-flex justify-content-center">
+                        <div class="card user-card-full ">
+                            <div class="row  bg-primary">
+                                <div class="col-sm-4 bg-c-lite-green user-profile">
+                                    <div class="card-block text-center text-white">
+                                        <div class="m-b-25"> <img src="../../assets/img/wbms-profile.png" class="img-radius w-75"
+                                                alt="User-Profile-Image">
+                                        </div>
+                                        <h2>{{usertype}}</h2> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="col-md-2 float-right mt-2">
+                                        <button (click)="edit()" class="btn btn-white shadow rounded-circle text-center px-2 py-2"
+                                            style="position:absolute;right:2px;top:2px"
+                                            *ngIf = "showEditBtn"
+                                            >
+                                            <i class="fa fa-pen" style="font-size:20px"></i>
+                                        </button>
+                                    </div>
+                                    <form id="editProfile" #profileform="ngForm" (ngSubmit)=onSubmit(profileform.value)>
+                                        <div class="card-block">
+                                            <input type="hidden" name="usertype" ngModel="{{usertype}}" id="usertype">
+                                            <div class="row">
+                                                <div class="col-md-3 display-inline">
+                                                    <input style="font-size: 20px;" class="border-none w-30" type="text"
+                                                        id="firstName" ngModel="{{firstName}}" [readonly]="editable == false"
+                                                        name="firstName" placeholder="first name" required />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input style="font-size: 20px;" class="border-none w-30" type="text"
+                                                        id="middleName" ngModel="{{middleName}}" [readonly]="editable == false"
+                                                        name="middleName" placeholder="middle name" required />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input style="font-size: 20px;" class="border-none w-30" type="text"
+                                                        id="lastName" ngModel="{{lastName}}" [readonly]="editable == false"
+                                                        name="lastName" placeholder="last name" required />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group mb-2" style="position: relative;">
+                                                        <label class="icon"> <i class="fa fa-user"></i> </label>&nbsp;&nbsp;
+                                                        <input type="text" ngModel="{{username}}" [readonly]="editable == false"
+                                                            id="username" name="username" placeholder="Username"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group mb-2" style="position: relative;">
+                                                        <label class="icon"> <i class="fa fa-lock"></i> </label>&nbsp;&nbsp;
+                                                        <input type="password" ngModel="{{password}}" [readonly]="editable == false"
+                                                            id="password" name="password" placeholder="password"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-7">
+                                                    <div class="form-group mb-2" style="position: relative;">
+                                                        <label class="icon"> <i class="fa fa-restroom"></i> </label>&nbsp;&nbsp;
+                                                        <input type="text" ngModel="{{gender}}" [readonly]="editable == false"
+                                                            id="gender" name="gender" placeholder="gender" required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <div class="form-group mb-2" style="position: relative;">
+                                                        <label class="icon"> <i class="fa fa-map-marker-alt"></i>
+                                                        </label>&nbsp;&nbsp;
+                                                        <input type="text" ngModel="{{address}}" [readonly]="editable == false"
+                                                            id="address" name="address" placeholder="address" required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group mb-2" style="position: relative;">
+                                                        <label class="icon"> <i class="fa fa-envelope"></i> </label>&nbsp;&nbsp;
+                                                        <input type="text" ngModel="{{email}}" [readonly]="editable == false"
+                                                            id="email" name="email" placeholder="email" required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group mb-2" style="position: relative;">
+                                                        <label class="icon"> <i class="fa fa-phone-alt"></i> </label>&nbsp;&nbsp;
+                                                        <input type="text" ngModel="{{contactNumber}}" [readonly]="editable == false"
+                                                            id="contactNumber" name="contactNumber" placeholder="phone number"
+                                                            required />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-end mt-3">
+                                                <button class="btn btn-danger px-5 mx-1 my-2" [routerLink]="['/household-records']"
+                                                    routerLinkActive="router-link-active" [disabled]="saving == true" *ngIf = "showEditBtn||showButtons">
+                                                    Cancel
+                                                </button>
+                                                <button type="submit" class="btn btn-success px-5 mx-1 my-2" [disabled]="saving == true" *ngIf = "showEditBtn||showButtons">
+                                                    <span class="spinner-border spinner-border-sm" role="status"
+                                                        aria-hidden="true" *ngIf="saving"></span>
+                                                    Save
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+</div>
