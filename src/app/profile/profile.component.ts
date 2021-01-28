@@ -66,6 +66,7 @@ export class ProfileComponent implements OnInit {
     this.loadInfoData(this.householdID);
     this.loadPendingTransactionData(this.householdID);
     this.loadPaidTransactionData(this.householdID);
+<<<<<<< HEAD
     this.originalContents = document.body.innerHTML;
   }
 
@@ -87,6 +88,10 @@ export class ProfileComponent implements OnInit {
       },
    
     );
+=======
+    this.loadHistory();
+    this.originalContents = document.body.innerHTML;
+>>>>>>> 5cb14711da1d5f23554b3a04f615c8da3b73c596
   }
 
   loadChart(data){
