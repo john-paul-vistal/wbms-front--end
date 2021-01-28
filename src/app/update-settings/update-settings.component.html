@@ -1,1 +1,134 @@
-<p>update-settings works!</p>
+<div id="page-content-wrapper">
+  <div class="page-content">
+    <div class="container">
+      <!-- breadcrumb -->
+      <div class="bg-white shadow  mt-3 rounded" style="position: relative;">
+        <button
+          class="btn btn-primary rounded-circle text-center mt-2 ml-1 float-left"
+          style="padding-left:13px;padding-right:13px;padding-top:8px;padding-bottom:8px;"
+        >
+          <i class="fa fa-bars"></i>
+        </button>
+        <ol class="breadcrumb bg-white mb-1 py-3 px-3 ml-3">
+          <li class="breadcrumb-item active" aria-current="page">Home</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Settings
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Update Settings
+          </li>
+        </ol>
+      </div>
+      <!-- breadcrumb -->
+      <div class="bg-white shadow rounded my-3 p-4">
+        <div class="d-flex justify-content-between">
+          <h4>Update Settings</h4>
+          <button
+            [routerLink]="['/settings']"
+            class="btn btn-primary px-5"
+            [disabled]="saving == true"
+          >
+            <i class="fa fa-arrow-left"></i>
+          </button>
+        </div>
+        <hr />
+        <div class="container rounded border px-4">
+          <form
+            #updateSettingsForm="ngForm"
+            (ngSubmit)="onSubmit(updateSettingsForm.value)"
+            autocomplete="off"
+          >
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 130.2 130.2"
+              *ngIf="saved"
+            >
+              <circle
+                class="path circle"
+                fill="none"
+                stroke="#73AF55"
+                stroke-width="6"
+                stroke-miterlimit="10"
+                cx="65.1"
+                cy="65.1"
+                r="62.1"
+              />
+              <polyline
+                class="path check"
+                fill="none"
+                stroke="#73AF55"
+                stroke-width="6"
+                stroke-linecap="round"
+                stroke-miterlimit="10"
+                points="100.2,40.2 51.5,88.8 29.8,67.5 "
+              />
+            </svg>
+            <div class="row">
+              <div class="col-sm">
+                <div class="form-group mb-2" style="position: relative;">
+                  <label class="icon mt-3">
+                    <i class="fa fa-cogs"> &nbsp;&nbsp;Setting Name</i>
+                  </label>
+                  &nbsp;&nbsp;
+                  <input
+                    type="text"
+                    [(ngModel)]="settingName"
+                    name="settingName"
+                    placeholder="setting Name"
+                    required
+                  />
+                </div>
+                <p class="text-left text-danger" *ngIf="emptySettingName">
+                  Setting Name is required
+                </p>
+              </div>
+
+              <div class="col-sm">
+                <div class="form-group mb-2" style="position: relative;">
+                  <label class="icon mt-3">
+                    <i class="fa fa-database m-1">&nbsp;&nbsp;Value</i>
+                  </label>
+                  &nbsp;&nbsp;
+                  <input
+                    type="text"
+                    [(ngModel)]="value"
+                    name="value"
+                    placeholder="Value"
+                    required
+                  />
+                </div>
+                <p class="text-left text-danger" *ngIf="emptyValue">
+                  Value is required
+                </p>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-2">
+              <button
+                class="btn btn-danger px-5 mx-1 my-2"
+                [routerLink]="['/settings']"
+                [disabled]="saving == true"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="btn btn-success px-5 mx-1 my-2"
+                [disabled]="saving == true"
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  *ngIf="saving"
+                ></span>
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

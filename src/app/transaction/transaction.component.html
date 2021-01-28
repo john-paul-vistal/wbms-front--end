@@ -32,13 +32,15 @@
             <input
               class="form-control searchTransaction"
               type="text"
+              [(ngModel)]="search"
+              (ngModelChange)="Search()"
               style="width:300px;padding-left:40px"
             />
           </div>
         </div>
         <hr />
 
-        <table class="table mt-4 shadow">
+        <table id="transactionRecord" class="table mt-4 shadow">
           <thead>
             <tr class="shadow" style="background:rgb(29, 144, 252)">
               <th scope="col">Transaction #</th>

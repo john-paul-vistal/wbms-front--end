@@ -11,6 +11,7 @@ import { ApiService } from '../service/api/api.service';
 export class TransactionComponent implements OnInit {
   page = 1;
   noRecords;
+  search: any;
   transactionRecords;
   constructor(
     private authenticationService: AuthenticationService,
@@ -41,6 +42,26 @@ export class TransactionComponent implements OnInit {
 
   pageChange(page) {
     page = page;
+  }
+
+  Search() {
+    console.log(this.search);
+    var input, filter, table, tr, td, i, txtValue;
+    input = this.search;
+    filter = input.toLowerCase();
+    table = document.getElementById('transactionRecord');
+    tr = table.getElementsByTagName('tr');
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName('td')[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+          tr[i].style.display = '';
+        } else {
+          tr[i].style.display = 'none';
+        }
+      }
+    }
   }
 
   toggle() {

@@ -11,6 +11,7 @@ import { ApiService } from '../service/api/api.service';
 export class CreateTransactionComponent implements OnInit {
   transactionData;
   noData = false;
+  search: any;
   constructor(
     private authenticationService: AuthenticationService,
     private apiService: ApiService
@@ -45,6 +46,26 @@ export class CreateTransactionComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  Search() {
+    console.log(this.search);
+    var input, filter, table, tr, td, i, txtValue;
+    input = this.search;
+    filter = input.toLowerCase();
+    table = document.getElementById('pendingTransaction');
+    tr = table.getElementsByTagName('tr');
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName('td')[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+          tr[i].style.display = '';
+        } else {
+          tr[i].style.display = 'none';
+        }
+      }
+    }
   }
 
   toggle() {

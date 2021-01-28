@@ -32,6 +32,8 @@
             <input
               class="form-control searchTransaction"
               type="text"
+              [(ngModel)]="search"
+              (ngModelChange)="Search()"
               style="width:300px;padding-left:40px"
             />
             <button
@@ -67,6 +69,7 @@
                     <div style="position:absolute;left:120px;top:30px">
                       <h3>
                         {{ data.firstName }}
+                        {{ data.middleName }}
                         {{ data.lastName }}
                       </h3>
                       <h6>{{ data.usertype }}</h6>

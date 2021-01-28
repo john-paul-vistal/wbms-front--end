@@ -14,7 +14,7 @@ import { RegReadingComponent } from './reg-reading/reg-reading.component';
 import { RegEmployeeComponent } from './reg-employee/reg-employee.component';
 import { RegSettingsComponent } from './reg-settings/reg-settings.component';
 import { StaffProfileComponent } from './staff-profile/staff-profile.component';
-
+import { UpdateSettingsComponent } from './update-settings/update-settings.component';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -81,6 +81,11 @@ const routes: Routes = [
   {
     path: 'staff-profile',
     component: StaffProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'update-settings',
+    component: UpdateSettingsComponent,
     canActivate: [AuthGuard]
   }
 ];

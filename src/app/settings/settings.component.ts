@@ -19,6 +19,10 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.authenticationService.authenticate('settings');
+    if (localStorage.getItem('UserType') != 'ADMIN') {
+      alert('Not Authorized Access!');
+      this.router.navigate(['/dashboard']);
+    }
     this.loadSettingsData();
   }
 
@@ -35,7 +39,7 @@ export class SettingsComponent implements OnInit {
   }
 
   onClickDelete(id) {
-    let url = 'https://wbm-system.herokuapp.com/api/settings/delete/';
+    let url = 'https://wbm-system.herokuapp.com/api/settings/delete';
     this.apiService.updateData(url, '', id).subscribe(
       result => {
         this.deleted = true;
