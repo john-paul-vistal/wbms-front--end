@@ -24,6 +24,9 @@ export class StaffProfileComponent implements OnInit {
   fullName;
   gender;
   phoneNumber;
+  showEditBtn  = true;
+  staffId
+  showButtons = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,10 +35,20 @@ export class StaffProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const staffId: string = this.route.snapshot.queryParamMap.get(
+   this.staffId  = this.route.snapshot.queryParamMap.get(
       'staffID'
     );
-    this.loadInfoData(staffId);
+    const parent: string = this.route.snapshot.queryParamMap.get(
+      'parent'
+    );
+
+    if(parent == '2'){
+      this.showEditBtn = false;
+    }else if(parent == "1"){
+      this.showEditBtn = true;
+    }
+
+    this.loadInfoData(this.staffId);
 
   }
 
@@ -47,15 +60,18 @@ export class StaffProfileComponent implements OnInit {
         this.staff = result;
         console.log(result);
         
-        this.fullName = (result['firstName'] +" "+ result['middleName'] +" "+  result['lastName']);
+        this.firstName = result['firstName'];
+        this.middleName=result['middleName'];
+        this.lastName = result['lastName']
         this.username = result['username'];
         this.gender = result['gender'];
         this.email = result['email'];
         this.contactNumber = result['contactNumber'];
         this.address = result['address'];
         this.usertype = result['usertype'];
-        this.contactNumber = result['contactNumber'];
+
       },
+
       error => {
         console.log(error);
       }      
@@ -66,12 +82,48 @@ export class StaffProfileComponent implements OnInit {
   saving = false;
   editable = false;
   newFullName;
+  newUserName;
+  newPassword;
+  newGender;
+  newAddress;
+  newEmail;
+  newContactNumber;
+  editedData;
+
   edit(){
+    this.showButtons = true;;
     this.editable = true;
-    let data = $("#editProfile")
-    console.log(data);  
-    
   }
+
+  // onEdit(){
+    
+  // }
+
+  checkForm(data) {
+    console.log("huy");
+  }
+
+  onSubmit(data){
+    console.log(data);
+    this.saving = true;
+    let url = "https://wbm-system.herokuapp.com/api/staff/update";
+    this.apiService.updateData(url, data, this.staff.id).subscribe(
+      result => {
+        this.editable =false;
+        this.saving = false;
+        this.showButtons = false;
+        console.log(result);
+        this.loadInfoData(this.staffId);
+      },
+      error => {
+        this.saving = false;
+        console.log(error);
+      }
+    )
+    // console.log(data);
+    // console.log(this.staff.id);
+  }
+
 
   
 

@@ -21,20 +21,32 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-8">
-                                    <form id="editProfile" action="">
+                                    <div class="col-md-2 float-right mt-2">
+                                        <button (click)="edit()" class="btn btn-white shadow rounded-circle text-center px-2 py-2"
+                                            style="position:absolute;right:2px;top:2px"
+                                            *ngIf = "showEditBtn"
+                                            >
+                                            <i class="fa fa-pen" style="font-size:20px"></i>
+                                        </button>
+                                    </div>
+                                    <form id="editProfile" #profileform="ngForm" (ngSubmit)=onSubmit(profileform.value)>
                                         <div class="card-block">
-                                            <input type="hidden" name="admin" value="admin" >
+                                            <input type="hidden" name="usertype" ngModel="{{usertype}}" id="usertype">
                                             <div class="row">
-                                                <div class="col-md-10">
-                                                    <input style="font-size: 40px;" class="border-none" type="text"
-                                                        ngModel="{{fullName}}" [readonly]="editable == false" name="fullName"
-                                                        placeholder="full name" required />
+                                                <div class="col-md-3 display-inline">
+                                                    <input style="font-size: 20px;" class="border-none w-30" type="text"
+                                                        id="firstName" ngModel="{{firstName}}" [readonly]="editable == false"
+                                                        name="firstName" placeholder="first name" required />
                                                 </div>
-                                                <div class="col-md-2">
-                                                    <button (click)="edit()" class="btn btn-white shadow rounded-circle text-center px-2 py-2"
-                                                        style="position:absolute;right:2px;top:2px">
-                                                        <i class="fa fa-pen" style="font-size:20px"></i>
-                                                    </button>
+                                                <div class="col-md-3">
+                                                    <input style="font-size: 20px;" class="border-none w-30" type="text"
+                                                        id="middleName" ngModel="{{middleName}}" [readonly]="editable == false"
+                                                        name="middleName" placeholder="middle name" required />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <input style="font-size: 20px;" class="border-none w-30" type="text"
+                                                        id="lastName" ngModel="{{lastName}}" [readonly]="editable == false"
+                                                        name="lastName" placeholder="last name" required />
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -42,14 +54,16 @@
                                                     <div class="form-group mb-2" style="position: relative;">
                                                         <label class="icon"> <i class="fa fa-user"></i> </label>&nbsp;&nbsp;
                                                         <input type="text" ngModel="{{username}}" [readonly]="editable == false"
-                                                            name="username" placeholder="Username" required />
+                                                            id="username" name="username" placeholder="Username"
+                                                            required />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group mb-2" style="position: relative;">
                                                         <label class="icon"> <i class="fa fa-lock"></i> </label>&nbsp;&nbsp;
                                                         <input type="password" ngModel="{{password}}" [readonly]="editable == false"
-                                                            name="password" placeholder="password" required />
+                                                            id="password" name="password" placeholder="password"
+                                                            required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -58,7 +72,7 @@
                                                     <div class="form-group mb-2" style="position: relative;">
                                                         <label class="icon"> <i class="fa fa-restroom"></i> </label>&nbsp;&nbsp;
                                                         <input type="text" ngModel="{{gender}}" [readonly]="editable == false"
-                                                            name="gender" placeholder="gender" required />
+                                                            id="gender" name="gender" placeholder="gender" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-5">
@@ -66,7 +80,7 @@
                                                         <label class="icon"> <i class="fa fa-map-marker-alt"></i>
                                                         </label>&nbsp;&nbsp;
                                                         <input type="text" ngModel="{{address}}" [readonly]="editable == false"
-                                                            name="address" placeholder="address" required />
+                                                            id="address" name="address" placeholder="address" required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -75,23 +89,24 @@
                                                     <div class="form-group mb-2" style="position: relative;">
                                                         <label class="icon"> <i class="fa fa-envelope"></i> </label>&nbsp;&nbsp;
                                                         <input type="text" ngModel="{{email}}" [readonly]="editable == false"
-                                                            name="email" placeholder="email" required />
+                                                            id="email" name="email" placeholder="email" required />
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group mb-2" style="position: relative;">
                                                         <label class="icon"> <i class="fa fa-phone-alt"></i> </label>&nbsp;&nbsp;
                                                         <input type="text" ngModel="{{contactNumber}}" [readonly]="editable == false"
-                                                            name="phonenumber" placeholder="phone number" required />
+                                                            id="contactNumber" name="contactNumber" placeholder="phone number"
+                                                            required />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-end mt-3">
                                                 <button class="btn btn-danger px-5 mx-1 my-2" [routerLink]="['/household-records']"
-                                                    routerLinkActive="router-link-active" [disabled]="saving == true">
+                                                    routerLinkActive="router-link-active" [disabled]="saving == true" *ngIf = "showEditBtn||showButtons">
                                                     Cancel
                                                 </button>
-                                                <button type="submit" class="btn btn-success px-5 mx-1 my-2" [disabled]="saving == true">
+                                                <button type="submit" class="btn btn-success px-5 mx-1 my-2" [disabled]="saving == true" *ngIf = "showEditBtn||showButtons">
                                                     <span class="spinner-border spinner-border-sm" role="status"
                                                         aria-hidden="true" *ngIf="saving"></span>
                                                     Save

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import * as bootstrap from 'bootstrap';
 import * as $ from 'jquery';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
