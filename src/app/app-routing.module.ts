@@ -13,6 +13,8 @@ import { RegHouseholdComponent } from './reg-household/reg-household.component';
 import { RegReadingComponent } from './reg-reading/reg-reading.component';
 import { RegEmployeeComponent } from './reg-employee/reg-employee.component';
 import { RegSettingsComponent } from './reg-settings/reg-settings.component';
+import { StaffProfileComponent } from './staff-profile/staff-profile.component';
+
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -74,6 +76,11 @@ const routes: Routes = [
   {
     path: 'register-setting',
     component: RegSettingsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'staff-profile',
+    component: StaffProfileComponent,
     canActivate: [AuthGuard]
   }
 ];
