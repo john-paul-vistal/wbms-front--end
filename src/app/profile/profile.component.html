@@ -351,7 +351,7 @@
   </div>
   <!-- MODAL END HERE -->
   <!-- FOR PRINT -->
-  <div id="reciept">
+  <div id="reciept" style="display:none">
     <div class="modal-dialog modal-lg">
       <div
         class="modal-content px-4"
@@ -400,11 +400,15 @@
               </tr>
               <tr class="border-bottom border-info">
                 <td><h6>RENDERED AMOUNT</h6></td>
-                <td><h6>0.00</h6></td>
+                <td>
+                  <h6>{{ renderedAmount }}</h6>
+                </td>
               </tr>
               <tr class="border-bottom border-info">
                 <td><h6>CHANGE</h6></td>
-                <td><h6>0.00</h6></td>
+                <td>
+                  <h6>{{ change | number: "1.2-2" }}</h6>
+                </td>
               </tr>
             </table>
           </div>
