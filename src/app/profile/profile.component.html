@@ -27,6 +27,7 @@
           <button
             class="btn btn-white shadow rounded-circle text-center px-2 py-2"
             style="position:absolute;right:2px;top:2px"
+            *ngIf="Authorized"
           >
             <i class="fa fa-pen" style="font-size:20px"></i>
           </button>
@@ -128,6 +129,7 @@
     </div>
     <hr />
   </div>
+  <!-- TABS -->
   <div class="container-fluid bg-white">
     <ul class="nav nav-tabs">
       <li class="nav-item">
@@ -153,7 +155,7 @@
             <tr class="shadow" style="background:rgb(29, 144, 252)">
               <th scope="col">Transaction #</th>
               <th scope="col">Meter Reading(/m³)</th>
-              <th scope="col">Total Amount</th>
+              <th scope="col">Total Amount(₱)</th>
               <th scope="col">Reading Date</th>
               <th scope="col">Due Date</th>
               <th scope="col">Recorded By</th>
@@ -161,17 +163,6 @@
             </tr>
           </thead>
           <tbody>
-            <!-- No History -->
-            <tr *ngIf="noPending">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><h4>No Pending Transaction Yet</h4></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <!-- No History -->
             <tr *ngFor="let transaction of pendingTransaction">
               <th scope="row">{{ transaction.id }}</th>
               <td>{{ transaction.meterReading }}</td>
@@ -183,25 +174,23 @@
                 {{ transaction.recorded_by.lastName }}
               </td>
               <td class="text-center">
-                <span
-                  [style.display]="
-                    transaction.ispaid === false ? 'block' : 'none'
-                  "
-                  class="btn btn-success"
+                <button
+                  type="button"
+                  class="btn btn-primary px-4"
+                  data-toggle="modal"
+                  data-target="#payment"
+                  data-backdrop="static"
+                  data-keyboard="false"
+                  (click)="payInfo(transaction.id)"
                 >
-                  Pay
-                </span>
-                <span
-                  [style.display]="
-                    transaction.ispaid === true ? 'block' : 'none'
-                  "
-                  class="bg-warning px-4 py-1 rounded"
-                  >Paid</span
-                >
+                  <i class="fas fa-money-bill-alt"></i>
+                  &nbsp; Pay
+                </button>
               </td>
             </tr>
           </tbody>
         </table>
+        <h4 *ngIf="noPending">No Pending Transaction Yet</h4>
       </div>
       <!-- Transaction History -->
       <div id="transactionHistory" class="tab-pane fade in">
@@ -218,17 +207,6 @@
             </tr>
           </thead>
           <tbody>
-            <!-- No History -->
-            <tr *ngIf="noHistory">
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><h4>No Transaction History Yet</h4></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <!-- No History -->
             <tr *ngFor="let transaction of paidTransaction">
               <th scope="row">{{ transaction.id }}</th>
               <td>{{ transaction.meterReading }}</td>
@@ -245,6 +223,7 @@
             </tr>
           </tbody>
         </table>
+        <h4 *ngIf="noHistory">No Transaction History Yet</h4>
       </div>
       <div id="statistics" class="tab-pane fade in">
         <div style="height:50%">
@@ -255,4 +234,241 @@
       </div>
     </div>
   </div>
+
+  <!-- MODAL -->
+  <div
+    class="modal fade"
+    id="payment"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <svg class="spinner" viewBox="0 0 50 50" *ngIf="loadingInfoData">
+      <circle
+        class="path"
+        cx="25"
+        cy="25"
+        r="20"
+        fill="none"
+        stroke-width="5"
+      ></circle>
+    </svg>
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content px-4">
+        <svg
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 130.2 130.2"
+          *ngIf="saved"
+        >
+          <circle
+            class="path circle"
+            fill="none"
+            stroke="#73AF55"
+            stroke-width="6"
+            stroke-miterlimit="10"
+            cx="65.1"
+            cy="65.1"
+            r="62.1"
+          />
+          <polyline
+            class="path check"
+            fill="none"
+            stroke="#73AF55"
+            stroke-width="6"
+            stroke-linecap="round"
+            stroke-miterlimit="10"
+            points="100.2,40.2 51.5,88.8 29.8,67.5 "
+          />
+        </svg>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Transaction Form</h5>
+          <button
+            type="button"
+            class="close"
+            (click)="cancel()"
+            [disabled]="saving == true"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body p-4">
+          <h5><span>Transaction #: </span>{{ transactionID }}</h5>
+          <div class="d-flex justify-content-end">
+            <p><b>Reading Date:</b> {{ readingDate }}</p>
+            <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+            <p><b>Due Date: </b>{{ dueDate }}</p>
+          </div>
+          <div class="d-flex justify-content-end">
+            <p class=""><b>Teller:&nbsp;&nbsp;</b>{{ teller }}</p>
+          </div>
+
+          <div class="border p-3">
+            <table style="width:100%">
+              <tr class="border-bottom">
+                <td><p>Customer Name</p></td>
+                <td>
+                  <p>{{ customername }}</p>
+                </td>
+              </tr>
+              <tr class="border-bottom">
+                <td><span>Meter Reading</span></td>
+                <td>
+                  <p class="mb-2 mt-2">{{ meterReading }}<b> m³</b></p>
+                </td>
+              </tr>
+              <tr class="border-bottom">
+                <td><b style="font-size:22px">Total Amount</b></td>
+                <td>
+                  <b style="font-size:22px"
+                    ><span style="font-size:25px">₱ </span>{{ totalAmount }}</b
+                  >
+                </td>
+              </tr>
+            </table>
+          </div>
+          <br />
+          <hr />
+          <!-- Form Start Here -->
+          <form
+            #Form="ngForm"
+            (ngSubmit)="onSubmit(Form.value)"
+            autocomplete="off"
+          >
+            <input type="hidden" ngModel="{{ id }}" name="transactedBy" id="" />
+            <div class="row mb-2">
+              <div class="col-md">
+                <div
+                  class="form-group mb-3"
+                  style="position: relative;border-bottom-color: black"
+                >
+                  <label class="icon">
+                    <i class="fa fa-money-bill-alt"></i> Render Amount</label
+                  >
+                  <input
+                    type="number"
+                    class="pay"
+                    (focus)="focusFunction()"
+                    ngModel="{{ rendered_amount }}"
+                    name="rendered_amount"
+                    placeholder="Render Cash"
+                    required
+                  />
+                </div>
+                <span class="text-danger" *ngIf="notEnough"
+                  >Rendered amount is Not Enongh</span
+                >
+              </div>
+              <div class="col-md">
+                <p>Change</p>
+                <h3 class="mt-4">
+                  ₱&nbsp;<span style="font-size:30px">{{
+                    change | number: "1.2-2"
+                  }}</span>
+                </h3>
+              </div>
+            </div>
+            <hr />
+            <div class="savingData loading-animation" *ngIf="saving"></div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="cancel()"
+                [disabled]="saving == true"
+                data-dismiss="modal"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="btn btn-success px-5"
+                [disabled]="rendered == false || saving == true"
+                (click)="recordPayment()"
+              >
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                  *ngIf="saving"
+                ></span>
+                Pay
+              </button>
+            </div>
+          </form>
+          <!-- Form end Here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- MODAL END HERE -->
+  <!-- FOR PRINT -->
+  <div id="reciept">
+    <div class="modal-dialog modal-lg">
+      <div
+        class="modal-content px-4"
+        [style.background-image]="'url(../assets/img/wbms-logo.png)'"
+        style="background-size:70%;background-repeat: no-repeat;background-position-x: center;"
+      >
+        <div
+          class="modal-body p-4"
+          style="background:rgba(255, 255, 255, 0.712)"
+        >
+          <div class="card-header">
+            <h4 class="text-center">Stark Waterworks System</h4>
+            <p class="text-center">Water Billing Management System</p>
+          </div>
+          <h5><span>Transaction #: </span>{{ transactionID }}</h5>
+          <div class="d-flex justify-content-end">
+            <p><b>Reading Date:</b> {{ readingDate }}</p>
+            <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+            <p><b>Due Date: </b>{{ dueDate }}</p>
+          </div>
+          <div class="d-flex justify-content-end">
+            <p class=""><b>Teller:&nbsp;&nbsp;</b>{{ teller }}</p>
+          </div>
+
+          <div class="border border-primary p-3">
+            <table style="width:100%">
+              <tr class="border-bottom border-info">
+                <td><p>Customer Name</p></td>
+                <td>
+                  <p>{{ customername }}</p>
+                </td>
+              </tr>
+              <tr class="border-bottom border-info">
+                <td><span>Meter Reading</span></td>
+                <td>
+                  <p class="mb-2 mt-2">{{ meterReading }}<b> m³</b></p>
+                </td>
+              </tr>
+              <tr class="border-bottom border-info">
+                <td><b style="font-size:22px">Total Amount</b></td>
+                <td>
+                  <b style="font-size:22px"
+                    ><span style="font-size:25px">₱ </span>{{ totalAmount }}</b
+                  >
+                </td>
+              </tr>
+              <tr class="border-bottom border-info">
+                <td><h6>RENDERED AMOUNT</h6></td>
+                <td><h6>0.00</h6></td>
+              </tr>
+              <tr class="border-bottom border-info">
+                <td><h6>CHANGE</h6></td>
+                <td><h6>0.00</h6></td>
+              </tr>
+            </table>
+          </div>
+          <br />
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END FOR PRINT -->
 </div>

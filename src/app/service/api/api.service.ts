@@ -21,6 +21,13 @@ export class ApiService {
     return this.http.get(url + `/${id}`, { headers: httpHeaders });
   }
 
+  updateData(url: string, body, id) {
+    const httpHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + localStorage.getItem('AuthorazationToken')
+    });
+    return this.http.put(url + `/${id}`, body, { headers: httpHeaders });
+  }
+
   saveData(url: string, body) {
     const httpHeaders = new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem('AuthorazationToken')

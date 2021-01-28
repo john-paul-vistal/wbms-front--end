@@ -9,6 +9,7 @@ import { ApiService } from '../service/api/api.service';
   styleUrls: ['./transaction.component.scss']
 })
 export class TransactionComponent implements OnInit {
+  page = 1;
   noRecords;
   transactionRecords;
   constructor(
@@ -27,6 +28,7 @@ export class TransactionComponent implements OnInit {
     this.apiService.getData(url).subscribe(
       result => {
         this.transactionRecords = result;
+        console.log(this.transactionRecords);
         if (this.transactionRecords.length == 0) {
           this.noRecords = true;
         }
@@ -36,5 +38,9 @@ export class TransactionComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  pageChange(page) {
+    page = page;
   }
 }
