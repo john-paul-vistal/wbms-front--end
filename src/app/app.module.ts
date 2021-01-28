@@ -24,6 +24,7 @@ import { RegEmployeeComponent } from './reg-employee/reg-employee.component';
 import { RegSettingsComponent } from './reg-settings/reg-settings.component';
 import { RegReadingComponent } from './reg-reading/reg-reading.component';
 import { StaffProfileComponent } from './staff-profile/staff-profile.component';
+import { UpdateSettingsComponent } from './update-settings/update-settings.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { StaffProfileComponent } from './staff-profile/staff-profile.component';
     RegEmployeeComponent,
     RegSettingsComponent,
     RegReadingComponent,
-    StaffProfileComponent
+    StaffProfileComponent,
+    UpdateSettingsComponent
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),
