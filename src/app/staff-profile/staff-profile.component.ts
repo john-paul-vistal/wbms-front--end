@@ -13,7 +13,7 @@ export class StaffProfileComponent implements OnInit {
 
   staff;
   username;
-  password="......";
+  password="P@ssw0rd";
   firstName;
   lastName;
   middleName;
@@ -27,6 +27,7 @@ export class StaffProfileComponent implements OnInit {
   showEditBtn  = true;
   staffId
   showButtons = false;
+  showReset = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,6 +45,8 @@ export class StaffProfileComponent implements OnInit {
 
     if(parent == '2'){
       this.showEditBtn = false;
+      this.showReset = true;
+      this.password="P@ssw0rd";
     }else if(parent == "1"){
       this.showEditBtn = true;
     }

@@ -1,6 +1,6 @@
 <div class="container-fluid bg-white shadow mt-3 pageContent rounded px-4 py-2 mb-5">
     <div class="d-flex justify-content-end">
-        <button class="btn btn-primary px-5" [routerLink]="['/employee']">
+        <button class="btn btn-primary px-5" [routerLink]="['/dashboard']">
             Back
         </button>
     </div>
@@ -102,7 +102,7 @@
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-end mt-3">
-                                                <button class="btn btn-danger px-5 mx-1 my-2" [routerLink]="['/household-records']"
+                                                <button class="btn btn-danger px-5 mx-1 my-2" [routerLink]="['/dashboard']"
                                                     routerLinkActive="router-link-active" [disabled]="saving == true" *ngIf = "showEditBtn||showButtons">
                                                     Cancel
                                                 </button>
@@ -110,6 +110,11 @@
                                                     <span class="spinner-border spinner-border-sm" role="status"
                                                         aria-hidden="true" *ngIf="saving"></span>
                                                     Save
+                                                </button>
+                                                <button type="submit" class="btn btn-warning px-5 mx-1 my-2" *ngIf = "showReset">
+                                                    <span class="spinner-border spinner-border-sm" role="status"
+                                                        aria-hidden="true" *ngIf="saving"></span>
+                                                   Reset
                                                 </button>
                                             </div>
                                         </div>
