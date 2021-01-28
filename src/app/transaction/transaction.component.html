@@ -49,15 +49,25 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let transaction of transactionRecords">
+            <tr
+              *ngFor="
+                let transaction of transactionRecords
+                  | paginate
+                    : {
+                        itemsPerPage: 20,
+                        currentPage: page
+                      }
+              "
+            >
               <th scope="row">{{ transaction.id }}</th>
+              <td>{{ transaction.customer.firstName }}</td>
               <td>{{ transaction.meterReading }}</td>
               <td>{{ transaction.total_amount }}</td>
               <td>{{ transaction.rendered_amount }}</td>
               <td>{{ transaction.change }}</td>
               <td>
-                {{ transaction.recorded_by.firstName }}
-                {{ transaction.recorded_by.lastName }}
+                {{ transaction.transacted_by.firstName }}
+                {{ transaction.transacted_by.lastName }}
               </td>
               <td class="text-center">
                 {{ transaction.transactedDate }}
@@ -71,7 +81,10 @@
         </h5>
         <!-- No History -->
         <div class="d-flex justify-content-end">
-          <!-- Pagination Buttons Here -->
+          <pagination-controls
+            maxSixe="5"
+            (pageChange)="page = $event"
+          ></pagination-controls>
         </div>
       </div>
     </div>
