@@ -12,7 +12,9 @@
           <i class="fa fa-bars"></i>
         </button>
         <ol class="breadcrumb bg-white mb-1 py-3 px-3 ml-3">
-          <li class="breadcrumb-item active" aria-current="page">Home</li>
+          <li class="breadcrumb-item active" aria-current="page">
+            <a [routerLink]="['dashboard']">Home</a> 
+          </li>
         </ol>
       </div>
       <!-- breadcrumb -->
@@ -67,13 +69,19 @@
           </div>
         </div>
       </div>
-      <!-- Cards -->
-
+     
+    
       <!-- Chart -->
       <div class="bg-white shadow rounded my-3 p-4" style="height:50%;">
-        <canvas id="myChart"></canvas>
+      <!-- <button class="btn btn-primary float-right">Year</button> -->
+      <select class="btn btn-white shadow-0 border float-right" name="" id="select">
+          <option name="year" value="" *ngFor = "let year of dataYear">{{year}}</option>
+      </select>
+        <canvas id="myChart">
+        </canvas>
       </div>
       <!-- Chart -->
     </div>
   </div>
 </div>
+

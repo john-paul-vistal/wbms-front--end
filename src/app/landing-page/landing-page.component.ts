@@ -16,19 +16,42 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private apiService: ApiService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.authenticationService.authenticate('dashboard');
-    this.loadChart();
+    this.chartdata();
     this.getTransactionRecordsNumber();
     this.getHouseholdNumber();
     this.getEmployeeNumber();
   }
+  
+  dataYear = []
+  chartdata(){
+    var resultData;
+    let url = 'https://wbm-system.herokuapp.com/api/transaction/getdataMonthly';
+    this.apiService.getData(url).subscribe(
+      result => {
+        resultData = result;
+        this.loadChart(resultData);
+        console.log(resultData)
+        for (const key in resultData) {
+          this.dataYear.push(key);
+        }
+            },
+      error => {
+        console.log(error);
+      },
+   
+    );
+  }
+
+
 
   //Chart JS Loader
-  loadChart() {
+  loadChart(data) {
     var ctx = document.getElementById('myChart');
+    // <select> <option value='2021'>2021</option></select>
     var chart = new Chart(ctx, {
       // The type of chart we want to create
       type: 'bar',
@@ -51,16 +74,50 @@ export class LandingPageComponent implements OnInit {
         ],
         datasets: [
           {
-            label: 'My First dataset',
+            label: 'Monthly Income',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
-            data: [2, 10, 5, 2, 20, 30, 45, 50, 12, 3, 6, 8]
+            data: [
+              data["2021"]["01"], 
+              data["2021"]["02"], 
+              data["2021"]["03"], 
+              data["2021"]["04"], 
+              data["2021"]["05"], 
+              data["2021"]["06"], 
+              data["2021"]["07"], 
+              data["2021"]["08"], 
+              data["2021"]["09"], 
+              data["2021"]["10"], 
+              data["2021"]["11"], 
+              data["2021"]["12"], 
+            ]
           }
         ]
       },
 
       // Configuration options go here
-      options: {}
+      options: {
+        scales: { yAxes: 
+          [{ scaleLabel: 
+            { display: true, 
+              labelString: `income` 
+            } }],
+            xAxes: 
+          [{ scaleLabel: 
+            { display: true, 
+              labelString: 'month' 
+            } }]  ,
+          } ,
+        legend: {
+          display: false,
+          
+        },
+        title: {
+          display: true,
+          text: "Monthly Income",
+          fontSize: 18
+        }
+      }
     });
   }
 
