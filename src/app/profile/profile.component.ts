@@ -47,6 +47,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    
     this.householdID = this.route.snapshot.queryParamMap.get('householdID');
 
     const parent: string = this.route.snapshot.queryParamMap.get('parent');
@@ -59,14 +60,34 @@ export class ProfileComponent implements OnInit {
     } else {
       this.Authorized = false;
     }
-
+    this.chartdata(this.householdID);
     this.loadInfoData(this.householdID);
     this.loadPendingTransactionData(this.householdID);
     this.loadPaidTransactionData(this.householdID);
-    this.loadHistory();
+   
   }
 
-  loadHistory() {
+  dataYear = []
+  chartdata(householdID){
+    var resultData;
+    let url = 'https://wbm-system.herokuapp.com/api/transaction/getdataMonthlyByCustomer';
+    this.apiService.getSpecificData(url,householdID).subscribe(
+      result => {
+        resultData = result;
+        this.loadChart(resultData);
+        console.log(resultData)
+        for (const key in resultData) {
+          this.dataYear.push(key);
+        }
+            },
+      error => {
+        console.log(error);
+      },
+   
+    );
+  }
+
+  loadChart(data){
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
       type: 'line',
@@ -87,8 +108,21 @@ export class ProfileComponent implements OnInit {
         ],
         datasets: [
           {
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3, 5, 3, 6, 4, 5, 7],
+            label: 'Monthly Payment Statistics',
+            data: [
+              data["2021"]["01"], 
+              data["2021"]["02"], 
+              data["2021"]["03"], 
+              data["2021"]["04"], 
+              data["2021"]["05"], 
+              data["2021"]["06"], 
+              data["2021"]["07"], 
+              data["2021"]["08"], 
+              data["2021"]["09"], 
+              data["2021"]["10"], 
+              data["2021"]["11"], 
+              data["2021"]["12"], 
+            ],
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
@@ -110,15 +144,35 @@ export class ProfileComponent implements OnInit {
         ]
       },
       options: {
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true
-              }
-            }
-          ]
-        }
+        scales: { yAxes: 
+          [{ scaleLabel: 
+            { display: true, 
+              labelString: `Payment` 
+            } }],
+            xAxes: 
+          [{ scaleLabel: 
+            { display: true, 
+              labelString: 'Month' 
+            } }]  ,
+          } ,
+
+          legend:{
+            display: false
+          },
+          title: {
+            display: true,
+            text: "Monthly Payment Statistics",
+            fontSize: 18
+          }
+        // scales: {
+        //   yAxes: [
+        //     {
+        //       ticks: {
+        //         beginAtZero: true
+        //       }
+        //     }
+        //   ]
+        // },
       }
     });
   }

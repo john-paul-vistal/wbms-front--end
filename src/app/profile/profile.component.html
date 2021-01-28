@@ -228,6 +228,9 @@
       <div id="statistics" class="tab-pane fade in">
         <div style="height:50%">
           <div class="mt-4">
+              <select class="btn btn-white shadow-0 border float-right" name="" id="select">
+                  <option name="year" value="" *ngFor = "let year of dataYear">{{year}}</option>
+              </select>
             <canvas id="myChart" width="400" height="125"></canvas>
           </div>
         </div>
