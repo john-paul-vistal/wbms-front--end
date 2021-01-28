@@ -36,7 +36,7 @@ export class SettingsComponent implements OnInit {
 
   onClickDelete(id) {
     let url = 'https://wbm-system.herokuapp.com/api/settings/delete/';
-    this.apiService.deletePermmanently(url, id).subscribe(
+    this.apiService.updateData(url, '', id).subscribe(
       result => {
         this.deleted = true;
         setTimeout(() => {
@@ -49,5 +49,9 @@ export class SettingsComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  toggle() {
+    $('#wrapper').toggleClass('toggled');
   }
 }

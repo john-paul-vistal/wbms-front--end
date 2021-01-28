@@ -25,7 +25,6 @@ export class EmployeeComponent implements OnInit {
     this.apiService.getData(url).subscribe(
       result => {
         this.staff = result;
-        console.log(this.staff);
       },
       error => {
         console.log(error);
@@ -35,5 +34,9 @@ export class EmployeeComponent implements OnInit {
 
   pageChanged(page: Event) {
     page = page;
+  }
+
+  toggle() {
+    $('#wrapper').toggleClass('toggled');
   }
 }

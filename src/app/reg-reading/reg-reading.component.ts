@@ -119,4 +119,8 @@ export class RegReadingComponent implements OnInit {
       return true;
     }
   }
+
+  toggle() {
+    $('#wrapper').toggleClass('toggled');
+  }
 }

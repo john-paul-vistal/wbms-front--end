@@ -28,7 +28,6 @@ export class TransactionComponent implements OnInit {
     this.apiService.getData(url).subscribe(
       result => {
         this.transactionRecords = result;
-        console.log(this.transactionRecords);
         if (this.transactionRecords.length == 0) {
           this.noRecords = true;
         }
@@ -42,5 +41,9 @@ export class TransactionComponent implements OnInit {
 
   pageChange(page) {
     page = page;
+  }
+
+  toggle() {
+    $('#wrapper').toggleClass('toggled');
   }
 }

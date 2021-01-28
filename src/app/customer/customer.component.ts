@@ -59,4 +59,8 @@ export class CustomerComponent implements OnInit {
   pageChanged(page: Event) {
     page = page;
   }
+
+  toggle() {
+    $('#wrapper').toggleClass('toggled');
+  }
 }

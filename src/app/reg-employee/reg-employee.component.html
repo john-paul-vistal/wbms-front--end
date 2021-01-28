@@ -6,14 +6,16 @@
         <button
           class="btn btn-primary rounded-circle text-center mt-2 ml-1 float-left"
           style="padding-left:13px;padding-right:13px;padding-top:8px;padding-bottom:8px;"
+          (click)="toggle()"
         >
           <i class="fa fa-bars"></i>
         </button>
         <ol class="breadcrumb bg-white mb-1 py-3 px-3 ml-3">
-          <li class="breadcrumb-item active" aria-current="page"><a [routerLink]="['/dashboard']">Home</a> </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            <a [routerLink]="['/dashboard']">Home</a>
+          </li>
           <li class="breadcrumb-item active" aria-current="page">
             <a [routerLink]="['/employee']">Employee</a>
-            
           </li>
           <li class="breadcrumb-item active" aria-current="page">
             <a [routerLink]="['/register-employee']">Register Employee</a>

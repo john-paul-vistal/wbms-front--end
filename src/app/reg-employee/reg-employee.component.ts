@@ -104,4 +104,8 @@ export class RegEmployeeComponent implements OnInit {
       return true;
     }
   }
+
+  toggle() {
+    $('#wrapper').toggleClass('toggled');
+  }
 }

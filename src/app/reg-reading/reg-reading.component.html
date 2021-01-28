@@ -6,6 +6,7 @@
         <button
           class="btn btn-primary rounded-circle text-center mt-2 ml-1 float-left"
           style="padding-left:13px;padding-right:13px;padding-top:8px;padding-bottom:8px;"
+          (click)="toggle()"
         >
           <i class="fa fa-bars"></i>
         </button>
@@ -15,7 +16,7 @@
             Household Records
           </li>
           <li class="breadcrumb-item active" aria-current="page">
-              <a [routerLink]="['register-reading']">Register Reading</a>            
+            <a [routerLink]="['register-reading']">Register Reading</a>
           </li>
         </ol>
       </div>
@@ -100,7 +101,8 @@
                   </label>
                   &nbsp;&nbsp;
                   <input
-                    type="text"
+                    type="number"
+                    min="0"
                     ngModel
                     name="meterReading"
                     placeholder="Cubic meter"
@@ -121,6 +123,7 @@
                     max="{{ today }}"
                     ngModel
                     name="reading_date"
+                    onkeydown="return false"
                   />
                 </div>
                 <p class="text-left text-danger mt-2" *ngIf="emptyReadingDate">

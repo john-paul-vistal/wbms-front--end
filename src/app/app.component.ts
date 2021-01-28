@@ -30,4 +30,7 @@ export class AppComponent {
       }
     );
   }
+  toggle() {
+    $('#wrapper').toggleClass('toggled');
+  }
 }

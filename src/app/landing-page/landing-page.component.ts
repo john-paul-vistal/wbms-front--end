@@ -16,7 +16,7 @@ export class LandingPageComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private apiService: ApiService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.authenticationService.authenticate('dashboard');
@@ -25,28 +25,25 @@ export class LandingPageComponent implements OnInit {
     this.getHouseholdNumber();
     this.getEmployeeNumber();
   }
-  
-  dataYear = []
-  chartdata(){
+
+  dataYear = [];
+  chartdata() {
     var resultData;
     let url = 'https://wbm-system.herokuapp.com/api/transaction/getdataMonthly';
     this.apiService.getData(url).subscribe(
       result => {
         resultData = result;
         this.loadChart(resultData);
-        console.log(resultData)
+        console.log(resultData);
         for (const key in resultData) {
           this.dataYear.push(key);
         }
-            },
+      },
       error => {
         console.log(error);
-      },
-   
+      }
     );
   }
-
-
 
   //Chart JS Loader
   loadChart(data) {
@@ -78,18 +75,18 @@ export class LandingPageComponent implements OnInit {
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: [
-              data["2021"]["01"], 
-              data["2021"]["02"], 
-              data["2021"]["03"], 
-              data["2021"]["04"], 
-              data["2021"]["05"], 
-              data["2021"]["06"], 
-              data["2021"]["07"], 
-              data["2021"]["08"], 
-              data["2021"]["09"], 
-              data["2021"]["10"], 
-              data["2021"]["11"], 
-              data["2021"]["12"], 
+              data['2021']['01'],
+              data['2021']['02'],
+              data['2021']['03'],
+              data['2021']['04'],
+              data['2021']['05'],
+              data['2021']['06'],
+              data['2021']['07'],
+              data['2021']['08'],
+              data['2021']['09'],
+              data['2021']['10'],
+              data['2021']['11'],
+              data['2021']['12']
             ]
           }
         ]
@@ -97,24 +94,16 @@ export class LandingPageComponent implements OnInit {
 
       // Configuration options go here
       options: {
-        scales: { yAxes: 
-          [{ scaleLabel: 
-            { display: true, 
-              labelString: `income` 
-            } }],
-            xAxes: 
-          [{ scaleLabel: 
-            { display: true, 
-              labelString: 'month' 
-            } }]  ,
-          } ,
+        scales: {
+          yAxes: [{ scaleLabel: { display: true, labelString: `Income` } }],
+          xAxes: [{ scaleLabel: { display: true, labelString: 'Months' } }]
+        },
         legend: {
-          display: false,
-          
+          display: false
         },
         title: {
           display: true,
-          text: "Monthly Income",
+          text: 'Monthly Income',
           fontSize: 18
         }
       }

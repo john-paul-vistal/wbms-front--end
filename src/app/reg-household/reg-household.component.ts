@@ -99,4 +99,8 @@ export class RegHouseholdComponent implements OnInit {
       return true;
     }
   }
+
+  toggle() {
+    $('#wrapper').toggleClass('toggled');
+  }
 }

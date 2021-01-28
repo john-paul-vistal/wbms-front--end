@@ -21,6 +21,7 @@ export class CreateTransactionComponent implements OnInit {
     this.loadData();
   }
 
+  pendingArray = [];
   loadData() {
     let resultData;
     let url =
@@ -28,6 +29,13 @@ export class CreateTransactionComponent implements OnInit {
     this.apiService.getData(url).subscribe(
       result => {
         resultData = result;
+
+        for (const key in resultData) {
+          this.pendingArray.push(resultData[key][0]);
+        }
+
+        console.log(this.pendingArray);
+
         this.transactionData = resultData;
         if (this.transactionData.length == 0) {
           this.noData = true;
@@ -37,5 +45,9 @@ export class CreateTransactionComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  toggle() {
+    $('#wrapper').toggleClass('toggled');
   }
 }
